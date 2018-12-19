@@ -1,0 +1,46 @@
+<flows>
+    <interval begin="0" end="3600">
+    <flow id='w1-s3' number='500' from='OrigionW1' to='DestinationS3'/>
+    <flow id='w2-e4' number='500' from='OrigionW2' to='DestinationE4'/>
+    <flow id='w3-e3' number='500' from='OrigionW3' to='DestinationE3'/>
+    <flow id='w4-s1' number='300' from='OrigionW4' to='DestinationS1'/>
+    <flow id='w5-e1' number='500' from='OrigionW5' to='DestinationE1'/>
+    <flow id='w6-e5' number='500' from='OrigionW6' to='DestinationE5'/>
+    <flow id='s1-w5' number='500' from='OrigionS1' to='DestinationW5'/>
+    <flow id='s2-n7' number='500' from='OrigionS2' to='DestinationN7'/>
+    <flow id='s4-n5' number='500' from='OrigionS4' to='DestinationN5'/>
+    <flow id='s5-e6' number='500' from='OrigionS5' to='DestinationE6'/>
+    <flow id='s6-w5' number='500' from='OrigionS6' to='DestinationW5'/>
+    <flow id='s7-n4' number='500' from='OrigionS7' to='DestinationN4'/>
+    <flow id='s8-w4' number='500' from='OrigionS8' to='DestinationW4'/>
+    <flow id='e1-w1' number='500' from='OrigionE1' to='DestinationW1'/>
+    <flow id='e2-w5' number='500' from='OrigionE2' to='DestinationW5'/>
+    <flow id='e3-n4' number='500' from='OrigionE3' to='DestinationN4'/>
+    <flow id='e4-w2' number='500' from='OrigionE4' to='DestinationW2'/>
+    <flow id='e5-n6' number='500' from='OrigionE5' to='DestinationN6'/>
+    <flow id='e6-n3' number='500' from='OrigionE6' to='DestinationN3'/>
+    <flow id='n1-s6' number='500' from='OrigionN1' to='DestinationS6'/>
+    <flow id='n2-s8' number='500' from='OrigionN2' to='DestinationS8'/>
+    <flow id='n3-s7' number='500' from='OrigionN3' to='DestinationS7'/>
+    <flow id='n4-e5' number='500' from='OrigionN4' to='DestinationE5'/>
+    <flow id='n5-w3' number='500' from='OrigionN5' to='DestinationW3'/>
+    <flow id='n6-n2' number='500' from='OrigionN6' to='DestinationN2'/>
+    <flow id='n7-s3' number='500' from='OrigionN7' to='DestinationS3'/>
+    <flow id='s2-w2' number='100' from='OrigionS2' to='DestinationW2'/>
+    <flow id='w7-s5' number='100' from='OrigionW7' to='DestinationS5'/>
+    <flow id='s7-n4_1' number='100' from='100323308#8' to='85711505#0'/> 
+    <flow id='w7-s2' number='100' from='OrigionW7' to='DestinationS2'/> 
+    <flow id='w2-n6' number='100' from='OrigionW2' to='DestinationN6'/>     
+    <flow id='e3-n3' number='100' from='OrigionE3' to='DestinationN3'/>     
+    <flow id='e5-e1' number='100' from='OrigionE5' to='DestinationE1'/>   
+    <flow id='s1-w4' number='100' from='OrigionS1' to='DestinationW4'/>     
+    <flow id='e3-s5' number='100' from='OrigionE3' to='DestinationS5'/>
+    <flow id='n4-w2' number='100' from='OrigionN4' to='DestinationW2'/>   
+    <flow id='n5-w7' number='100' from='OrigionN5' to='DestinationW7'/>     
+    <flow id='w9-n1' number='100' from='OrigionW9' to='DestinationN1'/>     
+    <flow id='w7-s7' number='100' from='OrigionW7' to='DestinationS7'/>
+    <flow id='w5-w9' number='100' from='OrigionW5' to='DestinationW9'/>         
+    <flow from="OrigionW9" id="w9-n3" number="500" to="DestinationN3" color='red'/>
+
+    </interval>
+</flows>

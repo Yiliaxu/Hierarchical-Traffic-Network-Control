@@ -1,0 +1,48 @@
+<nodes>
+    <node id="R1_Junction1" tl="R1_Junction1" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction2" tl="R1_Junction2" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction3" tl="R1_Junction3" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction4" tl="R1_Junction4" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction5" tl="R1_Junction5" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction6" tl="R1_Junction6" tlType="static" type="traffic_light"/>
+    <node id="R1_Junction7" tl="R1_Junction7" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction8" tl="R1_Junction8" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction9" tl="R1_Junction9" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction10" tl="R1_Junction10" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction11" tl="R1_Junction11" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction12" tl="R1_Junction12" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction13" tl="R1_Junction13" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction14" tl="R1_Junction14" tlType="static" type="traffic_light"/>
+    <node id="R1_Junction15" tl="R1_Junction15" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction16" tl="R1_Junction16" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction17" tl="R1_Junction17" tlType="actuated" type="traffic_light"/>
+    <node id="R1_Junction18" tl="R1_Junction18" tlType="actuated" type="traffic_light"/>
+
+    <node id="R2_Junction1" tl="R2_Junction1" tlType="actuated" type="traffic_light"/>
+    <node id="R2_Junction2" tl="R2_Junction2" tlType="actuated" type="traffic_light"/>
+    <node id="R2_Junction3" tl="R2_Junction3" tlType="actuated" type="traffic_light"/>
+    <node id="R2_Junction4" tl="R2_Junction4" tlType="static" type="traffic_light"/>
+    <node id="R2_Junction5" tl="R2_Junction5" tlType="actuated" type="traffic_light"/>
+    <node id="R2_Junction6" tl="R2_Junction6" tlType="actuated" type="traffic_light"/>
+    <node id="R2_Junction7" tl="R2_Junction7" tlType="actuated" type="traffic_light"/>
+    <node id="R2_Junction8" tl="R2_Junction8" tlType="actuated" type="traffic_light"/>
+    <node id="R2_Junction9" tl="R2_Junction9" tlType="static" type="traffic_light"/>
+    <node id="R2_Junction10" tl="R2_Junction10" tlType="actuated" type="traffic_light"/>
+    <node id="R2_Junction11" tl="R2_Junction11" tlType="actuated" type="traffic_light"/>
+
+    <node id="R3_Junction1" tl="R3_Junction1" tlType="actuated" type="traffic_light"/>
+    <node id="R3_Junction2" tl="R3_Junction2" tlType="actuated" type="traffic_light"/>
+    <node id="R3_Junction3" tl="R3_Junction3" tlType="actuated" type="traffic_light"/>
+    <node id="R3_Junction4" tl="R3_Junction4" tlType="actuated" type="traffic_light"/>
+    <node id="R3_Junction5" tl="R3_Junction5" tlType="actuated" type="traffic_light"/>
+    <node id="R3_Junction6" tl="R3_Junction6" tlType="actuated" type="traffic_light"/>
+    <node id="R3_Junction7" tl="R3_Junction7" tlType="actuated" type="traffic_light"/>
+    <node id="R3_Junction8" tl="R3_Junction8" tlType="actuated" type="traffic_light"/>
+    <node id="R3_Junction9" tl="R3_Junction9" tlType="static" type="traffic_light"/>
+    <node id="R3_Junction10" tl="R3_Junction10" tlType="actuated" type="traffic_light"/>
+    <node id="R3_Junction11" tl="R3_Junction11" tlType="actuated" type="traffic_light"/>
+    <node id="R3_Junction12" tl="R3_Junction12" tlType="actuated" type="traffic_light"/>
+    <node id="R3_Junction13" tl="R3_Junction13" tlType="actuated" type="traffic_light"/>
+    <node id="R3_Junction14" tl="R3_Junction14" tlType="actuated" type="traffic_light"/>
+
+</nodes>

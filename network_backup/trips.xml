@@ -1,0 +1,28 @@
+<trips>
+	<trip id='w1-s3' depart='500' from='OrigionW1' to='DestinationS3'/>
+	<trip id='w2-e4' depart='500' from='OrigionW2' to='DestinationE4'/>
+	<trip id='w3-e3' depart='500' from='OrigionW3' to='DestinationE3'/>
+	<trip id='w4-s1' depart='300' from='OrigionW4' to='DestinationS1'/>
+	<trip id='w5-e1' depart='500' from='OrigionW5' to='DestinationE1'/>
+	<trip id='w6-e5' depart='500' from='OrigionW6' to='DestinationE5'/>
+	<trip id='s1-w5' depart='500' from='OrigionS1' to='DestinationW5'/>
+	<trip id='s2-n7' depart='500' from='OrigionS2' to='DestinationN7'/>
+	<trip id='s4-n5' depart='500' from='OrigionS4' to='DestinationN5'/>
+	<trip id='s5-e6' depart='500' from='OrigionS5' to='DestinationE6'/>
+	<trip id='s6-w5' depart='500' from='OrigionS6' to='DestinationW5'/>
+	<trip id='s7-n4' depart='500' from='OrigionS7' to='DestinationN4'/>
+	<trip id='s8-w4' depart='500' from='OrigionS8' to='DestinationW4'/>
+	<trip id='e1-w1' depart='500' from='OrigionE1' to='DestinationW1'/>
+	<trip id='e2-w5' depart='500' from='OrigionE2' to='DestinationW5'/>
+	<trip id='e3-n4' depart='500' from='OrigionE3' to='DestinationN4'/>
+	<trip id='e4-w2' depart='500' from='OrigionE4' to='DestinationW2'/>
+	<trip id='e5-n6' depart='500' from='OrigionE5' to='DestinationN6'/>
+	<trip id='e6-n3' depart='500' from='OrigionE6' to='DestinationN3'/>
+	<trip id='n1-s6' depart='500' from='OrigionN1' to='DestinationS6'/>
+	<trip id='n2-s8' depart='500' from='OrigionN2' to='DestinationS8'/>
+	<trip id='n3-s7' depart='500' from='OrigionN3' to='DestinationS7'/>
+	<trip id='n4-e5' depart='500' from='OrigionN4' to='DestinationE5'/>
+	<trip id='n5-w3' depart='500' from='OrigionN5' to='DestinationW3'/>
+	<trip id='n6-n2' depart='500' from='OrigionN6' to='DestinationN2'/>
+	<trip id='n7-s3' depart='500' from='OrigionN7' to='DestinationS3'/>
+</trips>

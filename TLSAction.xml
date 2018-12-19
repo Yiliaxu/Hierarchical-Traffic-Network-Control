@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<TLSAction>
+		<Intersection PhaseNum="3" id="R1_Junction1" phase1="rGrrrrrrrGrrrrrrrr" phase2="rrrrrGGrrrrrrrrrrr" phase3="rrrrrrrrrrrrrrrrGr"/>
+		<Intersection PhaseNum="3" id="R1_Junction2" phase1="GrrrrrrGrrrrr" phase2="rrrrGGrrrrrrr" phase3="rrrrrrrrrrrGr"/>
+		<Intersection PhaseNum="3" id="R1_Junction3" phase1="rGrrrrrrrrGrrrrrrr" phase2="rrGrrrrrrrrrrrrrrr" phase3="rrrrrGGrrrrrrrGGrr"/>
+		<Intersection PhaseNum="2" id="R1_Junction4" phase1="Grrrrrrrr" phase2="rrrrrrrGr"/>
+		<Intersection PhaseNum="2" id="R1_Junction5" phase1="rGrrrrrrrr" phase2="rrrrGGrrrr"/>
+		<Intersection PhaseNum="3" id="R1_Junction7" phase1="rrrrrrrrrGrrrrrrr" phase2="rrGrrrrrrrrrrrrrr" phase3="rrrrrGGrrrrrrGGrr"/>
+		<Intersection PhaseNum="2" id="R1_Junction8" phase1="GrrrGrrrr" phase2="rrrrrrrGr"/>
+		<Intersection PhaseNum="2" id="R1_Junction9" phase1="rrrGrrrrr" phase2="rrrrrrGGr"/>
+		<Intersection PhaseNum="2" id="R1_Junction10" phase1="rrrrrrrGGrr" phase2="rrrrrGrrrrr"/>
+		<Intersection PhaseNum="2" id="R1_Junction11" phase1="rrrrrGGrrrr" phase2="rrrrrrrrrGr"/>
+		<Intersection PhaseNum="2" id="R1_Junction12" phase1="rrrrrGGrrrr" phase2="rrrrrrrrGGG"/>
+		<Intersection PhaseNum="4" id="R1_Junction13" phase1="rrrrrrrrrrrrrGrrrrrrr" phase2="rrrGrrrrrrrrrrrrrrrrr" phase3="rrrrrrGGGrrrrrrrrrrrr" phase4="rrrrrrrrrrrrrrrrrGGrr"/>
+		<Intersection PhaseNum="3" id="R1_Junction15" phase1="rrrrrrrGr" phase2="rGrrrrrrr" phase3="rrrrGrrrr"/>
+		<Intersection PhaseNum="2" id="R1_Junction16" phase1="rrrrrrrrrrrrGrrGrrrrrrrrrrrrr" phase2="rrrrrrrGGrrrrrrrrrrrrrrrrGGrr"/>
+		<Intersection PhaseNum="2" id="R1_Junction17" phase1="rGrrrrrrr" phase2="rrrrGrGrr"/>
+		<Intersection PhaseNum="2" id="R1_Junction18" phase1="rrrrGr" phase2="rGrrrr"/>
+		<Intersection PhaseNum="3" id="R2_Junction1" phase1="rrrrrrrrrGrrrrrr" phase2="rGGrrrrrrrrrrrrr" phase3="rrrrrGrrrrrrrrrr"/>
+		<Intersection PhaseNum="2" id="R2_Junction2" phase1="rGrrrrrrrGrrrrrr" phase2="rrrrrGrrrrrrrGrr"/>
+		<Intersection PhaseNum="2" id="R2_Junction3" phase1="rGGrrrrrrrGGrrrrrr" phase2="rrrrrrGrrrrrrrrGrr"/>
+		<Intersection PhaseNum="2" id="R2_Junction5" phase1="rGrrrrrrrrrrrrrrrGrrrrrrr" phase2="rrrrrrrrrrrrGrrrrrrrrGrrr"/>
+		<Intersection PhaseNum="2" id="R2_Junction6" phase1="rGrrrrrrrGrrrrrr" phase2="rrrrrGrrrrrrrGrr"/>
+		<Intersection PhaseNum="2" id="R2_Junction7" phase1="GGGrrrrrrrGGrrrrrr" phase2="rrrrrrrrrrrrrrrGrr"/>
+		<Intersection PhaseNum="2" id="R2_Junction8" phase1="rrrrrGrrrrrrrrrr" phase2="rrGrrrrrrrrrrrrr"/>
+		<Intersection PhaseNum="2" id="R2_Junction10" phase1="rrGrrrrrrrGGGrrrrrrr" phase2="rrrrrrrrrrrrrrrGrrrr"/>
+		<Intersection PhaseNum="2" id="R2_Junction11" phase1="GrrrrrrGr" phase2="rrrrGrrrr"/>
+		<Intersection PhaseNum="2" id="R3_Junction1" phase1="rrGrrrrrrrrrrGrrrrrrr" phase2="rrrrrrrGGrrrrrrrrGGrr"/>
+		<Intersection PhaseNum="2" id="R3_Junction2" phase1="GrrrGrrrr" phase2="rrrrrrrGr"/>
+		<Intersection PhaseNum="2" id="R3_Junction3" phase1="rGrrrrrGrr" phase2="rrrrGGrrrr"/>
+		<Intersection PhaseNum="2" id="R3_Junction4" phase1="rGrrrrGrr" phase2="rrrrGrrrr"/>
+		<Intersection PhaseNum="2" id="R3_Junction5" phase1="GrrrGrrrr" phase2="rrrrrrrGr"/>
+		<Intersection PhaseNum="3" id="R3_Junction6" phase1="GGrrrrrrrrrGGGGrrrrrrrr" phase2="rrrrrrrrrrrrrrrGrrrrrrr" phase3="rrrrrrGGrrrrrrrrrGGGGrr"/>
+		<Intersection PhaseNum="3" id="R3_Junction7" phase1="GGGrrrrrrrrrr" phase2="rrrrGrrrrrrrr" phase3="rrrrrrrrrrGGr"/>
+		<Intersection PhaseNum="3" id="R3_Junction8" phase1="rrrrrrrrGGrrrr" phase2="rrGrrrrrrrrrrr" phase3="rrrrGrrrrrrGrr"/>
+		<Intersection PhaseNum="3" id="R3_Junction10" phase1="rGrrrrrrrrrrrrrrrr" phase2="rrrrrrrrrrrGrrrrrr" phase3="rrrrrGGrrrrrrrGGrr"/>
+		<Intersection PhaseNum="2" id="R3_Junction11" phase1="rGGrrrrrrrrGGrrrrrrr" phase2="rrrrrrGGrrrrrrrrGGrr"/>
+		<Intersection PhaseNum="3" id="R3_Junction12" phase1="rGGGrrrrrrrrrrrrrr" phase2="rrrrrrrrrrGGrrrrrr" phase3="rrrrrGrrrrrrrrrrrr"/>
+		<Intersection PhaseNum="2" id="R3_Junction13" phase1="GrrrGrrrr" phase2="rrrrrrrGr"/>
+		<Intersection PhaseNum="3" id="R3_Junction14" phase1="rrrrrrrrrrrGGGrrrrrr" phase2="rGGrrrrrrrrrrrrrrrrr" phase3="rrrrrGrrrrrrrrrrGGrr"/>
+	</TLSAction>

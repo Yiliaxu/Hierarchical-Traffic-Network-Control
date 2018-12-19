@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<Variable>
+		<Link>
+			<variable IncludeLinks="OrigionW4 -135626767#7" id="x1"/>
+			<variable IncludeLinks="-135626767#6 -135626767#5" id="x2"/>
+			<variable IncludeLinks="OrigionW3" id="x3"/>
+			<variable IncludeLinks="91568767#5" id="x4"/>
+			<variable IncludeLinks="91568767#6" id="x5"/>
+			<variable IncludeLinks="91568767#8" id="x6"/>
+			<variable IncludeLinks="91568767#9 91568767#10 135626766 135626762#0" id="x7"/>
+			<variable IncludeLinks="135626762#1 135626762#2" id="x8"/>
+			<variable IncludeLinks="OrigionS2" id="x9"/>
+			<variable IncludeLinks="91568767#6" id="x10"/>
+			<variable IncludeLinks="OrigionS4 135626776#1" id="x11"/>
+			<variable IncludeLinks="91568767#8" id="x12"/>
+			<variable IncludeLinks="91568767#9 70438941#1 70438941#2 70438941#3" id="x13"/>
+			<variable IncludeLinks="OrigionS5" id="x14"/>
+			<variable IncludeLinks="91568767#9 91568767#10 135626766 135626762#0" id="x15"/>
+			<variable IncludeLinks="253924915#0 253924915#1" id="x16"/>
+			<variable IncludeLinks="OrigionS6 -230239448#0 -230239447 -230491007" id="x17"/>
+			<variable IncludeLinks="135626762#1 135626762#2" id="x18"/>
+			<variable IncludeLinks="100323308#5" id="x19"/>
+			<variable IncludeLinks="OrigionS7 100323308#2 100323308#3" id="x20"/>
+			<variable IncludeLinks="100323308#5" id="x21"/>
+			<variable IncludeLinks="-100323308#6" id="x22"/>
+			<variable IncludeLinks="-100323308#5" id="x23"/>
+			<variable IncludeLinks="69550029#1 492979883" id="x24"/>
+			<variable IncludeLinks="-100323308#6" id="x25"/>
+			<variable IncludeLinks="-100323308#5" id="x26"/>
+			<variable IncludeLinks="253924914#3 253924914#4" id="x27"/>
+			<variable IncludeLinks="253924914#5 253924914#6 253924914#7" id="x28"/>
+			<variable IncludeLinks="492979884#0 492979884#1" id="x29"/>
+			<variable IncludeLinks="492979884#3" id="x30"/>
+			<variable IncludeLinks="492979884#4" id="x31"/>
+			<variable IncludeLinks="162259815#0 162259815#1 162259815#2 162259815#3 162259815#4 162259815#5" id="x32"/>
+			<variable IncludeLinks="OrigionW8" id="x33"/>
+			<variable IncludeLinks="38866846#1" id="x34"/>
+			<variable IncludeLinks="38866846#2" id="x35"/>
+			<variable IncludeLinks="38866846#3 135626787 135626763#0 135626763#1" id="x36"/>
+			<variable IncludeLinks="492981119" id="x37"/>
+			<variable IncludeLinks="492979896#0" id="x38"/>
+			<variable IncludeLinks="-492979896#2" id="x39"/>
+			<variable IncludeLinks="-492979896#0" id="x40"/>
+			<variable IncludeLinks="-492981119" id="x41"/>
+			<variable IncludeLinks="-135626763#1 -135626763#0 -135626787 -38866846#3" id="x42"/>
+			<variable IncludeLinks="-38866846#2" id="x43"/>
+			<variable IncludeLinks="-38866846#1" id="x44"/>
+			<variable IncludeLinks="95775639#1 95775639#2" id="x45"/>
+			<variable IncludeLinks="95775639#3 95775639#4 95775639#5 492979884#1" id="x46"/>
+			<variable IncludeLinks="492979884#3" id="x47"/>
+			<variable IncludeLinks="OrigionW2" id="x48"/>
+			<variable IncludeLinks="OrigionS1 135626767#3" id="x49"/>
+			<variable IncludeLinks="135626767#5 135626767#6" id="x50"/>
+			<variable IncludeLinks="-69555386#0" id="x51"/>
+			<variable IncludeLinks="69550029#1 492979883" id="x52"/>
+			<variable IncludeLinks="492981120 135626779 135626780#0 135626780#1 135626780#2" id="x53"/>
+			<variable IncludeLinks="162259815#0 162259815#1 162259815#2 69059186#0 69059186#1" id="x54"/>
+			<variable IncludeLinks="69059186#2" id="x55"/>
+			<variable IncludeLinks="68313224#2" id="x56"/>
+			<variable IncludeLinks="492979886 135626762#2" id="x57"/>
+		</Link>
+		<Phase>
+			<variable JunctionID="R3_Junction10" LanesNum="2" id="s1" index="3"/>
+			<variable JunctionID="R3_Junction11" LanesNum="2" id="s2" index="2"/>
+			<variable JunctionID="R3_Junction11" LanesNum="2" id="s3" index="1"/>
+			<variable JunctionID="R3_Junction12" LanesNum="2" id="s4" index="2"/>
+			<variable JunctionID="R3_Junction14" LanesNum="2" id="s5" index="1"/>
+			<variable JunctionID="R3_Junction8" LanesNum="2" id="s6" index="1"/>
+			<variable JunctionID="R3_Junction7" LanesNum="1" id="s7" index="3"/>
+			<variable JunctionID="R3_Junction6" LanesNum="2" id="s8" index="1"/>
+			<variable JunctionID="R3_Junction12" LanesNum="1" id="s9" index="3"/>
+			<variable JunctionID="R3_Junction14" LanesNum="1" id="s10" index="1"/>
+			<variable JunctionID="R3_Junction14" LanesNum="1" id="s11" index="3"/>
+			<variable JunctionID="R3_Junction8" LanesNum="2" id="s12" index="1"/>
+			<variable JunctionID="R3_Junction4" LanesNum="1" id="s13" index="2"/>
+			<variable JunctionID="R3_Junction8" LanesNum="1" id="s14" index="3"/>
+			<variable JunctionID="R3_Junction7" LanesNum="1" id="s15" index="3"/>
+			<variable JunctionID="R3_Junction3" LanesNum="2" id="s16" index="2"/>
+			<variable JunctionID="R3_Junction7" LanesNum="1" id="s17" index="2"/>
+			<variable JunctionID="R3_Junction6" LanesNum="1" id="s18" index="2"/>
+			<variable JunctionID="R3_Junction1" LanesNum="2" id="s19" index="2"/>
+			<variable JunctionID="R3_Junction6" LanesNum="2" id="s20" index="3"/>
+			<variable JunctionID="R3_Junction1" LanesNum="2" id="s21" index="2"/>
+			<variable JunctionID="R3_Junction1" LanesNum="2" id="s22" index="2"/>
+			<variable JunctionID="R3_Junction6" LanesNum="1" id="s23" index="3"/>
+			<variable JunctionID="R3_Junction7" LanesNum="1" id="s24" index="1"/>
+			<variable JunctionID="R3_Junction1" LanesNum="2" id="s25" index="2"/>
+			<variable JunctionID="R3_Junction6" LanesNum="2" id="s26" index="3"/>
+			<variable JunctionID="R3_Junction13" LanesNum="1" id="s27" index="2"/>
+			<variable JunctionID="R3_Junction8" LanesNum="1" id="s28" index="3"/>
+			<variable JunctionID="R3_Junction14" LanesNum="2" id="s29" index="2"/>
+			<variable JunctionID="R3_Junction12" LanesNum="2" id="s30" index="1"/>
+			<variable JunctionID="R3_Junction11" LanesNum="2" id="s31" index="1"/>
+			<variable JunctionID="R3_Junction14" LanesNum="2" id="s32" index="3"/>
+			<variable JunctionID="R3_Junction5" LanesNum="1" id="s33" index="1"/>
+			<variable JunctionID="R3_Junction13" LanesNum="1" id="s34" index="1"/>
+			<variable JunctionID="R3_Junction4" LanesNum="1" id="s35" index="1"/>
+			<variable JunctionID="R3_Junction3" LanesNum="1" id="s36" index="1"/>
+			<variable JunctionID="R3_Junction2" LanesNum="1" id="s37" index="1"/>
+			<variable JunctionID="R3_Junction1" LanesNum="1" id="s38" index="1"/>
+			<variable JunctionID="R3_Junction1" LanesNum="1" id="s39" index="1"/>
+			<variable JunctionID="R3_Junction2" LanesNum="1" id="s40" index="1"/>
+			<variable JunctionID="R3_Junction3" LanesNum="1" id="s41" index="1"/>
+			<variable JunctionID="R3_Junction4" LanesNum="1" id="s42" index="1"/>
+			<variable JunctionID="R3_Junction13" LanesNum="1" id="s43" index="1"/>
+			<variable JunctionID="R3_Junction5" LanesNum="1" id="s44" index="1"/>
+			<variable JunctionID="R3_Junction5" LanesNum="1" id="s45" index="2"/>
+			<variable JunctionID="R3_Junction14" LanesNum="2" id="s46" index="2"/>
+			<variable JunctionID="R3_Junction12" LanesNum="1" id="s47" index="1"/>
+			<variable JunctionID="R3_Junction10" LanesNum="1" id="s48" index="2"/>
+			<variable JunctionID="R3_Junction11" LanesNum="2" id="s49" index="2"/>
+			<variable JunctionID="R3_Junction10" LanesNum="2" id="s50" index="3"/>
+			<variable JunctionID="R3_Junction6" LanesNum="2" id="s51" index="1"/>
+			<variable JunctionID="R3_Junction7" LanesNum="2" id="s52" index="1"/>
+			<variable JunctionID="R3_Junction8" LanesNum="1" id="s53" index="2"/>
+			<variable JunctionID="R3_Junction9" LanesNum="1" id="s54" index=""/>
+			<variable JunctionID="R3_Junction10" LanesNum="1" id="s55" index="1"/>
+			<variable JunctionID="R3_Junction2" LanesNum="1" id="s56" index="2"/>
+			<variable JunctionID="R3_Junction6" LanesNum="1" id="s57" index="1"/>
+		</Phase>
+	</Variable>
