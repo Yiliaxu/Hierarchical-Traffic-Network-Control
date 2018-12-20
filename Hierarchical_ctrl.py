@@ -18,28 +18,27 @@ import cplex
 import pdb
 from NetLabels import *
 
+SUMO_HOME = "/usr/local/bin/sumo"
+tools = "/home/Arain/sumo-git/tools/"
+sys.path.append(tools)
 
-if 'SUMO_HOME' in os.environ:
-	tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
-	sys.path.append(tools)
-else:
-	sys.exit("please declare environment variable 'SUMO_HOME'")
-sumoBinary = "E:/software/sumo-win64-0.32.0/sumo-0.32.0/bin/sumo-gui"
+sumoBinary = "/usr/local/bin/sumo"
 
 sumoCmd = [sumoBinary, "-c", "chj.sumocfg","--seed", str(random.randint(1,100))]
 
 PORT = 8813
+
 import traci
 
-doc1 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\TLSAction.xml')
+doc1 = etree.parse('TLSAction.xml')
 ActionRoot = doc1.getroot()
-doc2 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_final.rou.xml')
+doc2 = etree.parse('Chj_final.rou.xml')
 RouteRoot = doc2.getroot()
-doc3 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\loops_ctrl.xml')
+doc3 = etree.parse('loops_ctrl.xml')
 LoopsRoot = doc3.getroot()
-doc4 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_ctrl.net.xml')
+doc4 = etree.parse('Chj_ctrl.net.xml')
 NetRoot = doc4.getroot()
-doc5 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\TLSconnections.xml')
+doc5 = etree.parse('TLSconnections.xml')
 PhaseRoot = doc5.getroot()
 
 
