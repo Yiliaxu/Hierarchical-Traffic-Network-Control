@@ -15,25 +15,44 @@ from collections import defaultdict
 
 import pdb
 
-if 'SUMO_HOME' in os.environ:
-	tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
-	sys.path.append(tools)
-else:
-	sys.exit("please declare environment variable 'SUMO_HOME'")
-sumoBinary = "E:/software/sumo-win64-0.32.0/sumo-0.32.0/bin/sumo-gui"
+SUMO_HOME = "/usr/local/bin/sumo"
+tools = "/home/Arain/sumo-git/tools/"
+sys.path.append(tools)
+
+sumoBinary = "/usr/local/bin/sumo"
 
 sumoCmd = [sumoBinary, "-c", "chj.sumocfg","--seed", str(random.randint(1,100))]
+
+
+# if 'SUMO_HOME' in os.environ:
+# 	tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
+# 	sys.path.append(tools)
+# else:
+# 	sys.exit("please declare environment variable 'SUMO_HOME'")
+# sumoBinary = "E:/software/sumo-win64-0.32.0/sumo-0.32.0/bin/sumo-gui"
+
+# sumoCmd = [sumoBinary, "-c", "chj.sumocfg","--seed", str(random.randint(1,100))]
 
 PORT = 8813
 import traci
 
-doc1 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\TLSAction.xml')
+# doc1 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\TLSAction.xml')
+# ActionRoot = doc1.getroot()
+# doc2 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_final.rou.xml')
+# RouteRoot = doc2.getroot()
+# doc3 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\loops_ctrl.xml')
+# LoopsRoot = doc3.getroot()
+# doc4 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_final.net.xml')
+# NetRoot = doc4.getroot()
+
+
+doc1 = etree.parse('./TLSAction.xml')
 ActionRoot = doc1.getroot()
-doc2 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_final.rou.xml')
+doc2 = etree.parse('./Chj_final.rou.xml')
 RouteRoot = doc2.getroot()
-doc3 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\loops_ctrl.xml')
+doc3 = etree.parse('./loops_ctrl.xml')
 LoopsRoot = doc3.getroot()
-doc4 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_final.net.xml')
+doc4 = etree.parse('./Chj_final.net.xml')
 NetRoot = doc4.getroot()
 
 EdgesList = []
@@ -159,7 +178,7 @@ if __name__ == '__main__':
 				# print PhaseTime
 				
 
-	fp = open('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\VehNum.xml','w')
+	fp = open('./VehNum.xml','w')
 	
 	try:
 		VehNum_files.writexml(fp,indent='\t', addindent='\t',newl='\n',encoding="utf-8")

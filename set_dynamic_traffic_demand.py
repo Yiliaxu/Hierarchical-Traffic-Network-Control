@@ -13,8 +13,6 @@ demand_level = 8
 Flow_net = etree.parse('./Chj_final.rou.xml')
 FlowRoot = Flow_net.getroot()
 
-
-
 DynamicFlows_files = doc.Document()
 DynamicFlows = DynamicFlows_files.createElement('flows')
 DynamicFlows_files.appendChild(DynamicFlows)

@@ -61,11 +61,14 @@ NetRoot = doc4.getroot()
 doc5 = etree.parse('./TLSconnections.xml')
 PhaseRoot = doc5.getroot()
 
+VehNum_files = doc.Document()
+VehNum = VehNum_files.createElement('VehicleNumber')
+VehNum_files.appendChild(VehNum)
 
 #### parameters
 Tsim = 3600
 Tc = 60
-Tu = 2 ## upper level control cycle
+Tu = 3 ## upper level control cycle
 tc = 6 ## lower level control cycle
 period = 10 ##seconds
 Veh_L = 7
@@ -248,11 +251,13 @@ if __name__ == '__main__':
 		ActionInfo[intersection_id]=PhaseAction
 	# print PhaseTime
 
-	# VehNumEdge = defaultdict(lambda:0)
+	
+	VehNumEdge = defaultdict(lambda:0) ### record
+
 	VehNumRegion = defaultdict(lambda:np.zeros(Tc))
-	lt = 3  ### policy update cycle
-	VehNumLoop = defaultdict(lambda:np.zeros(lt))
-	VehNumLoopsAmongRegions = defaultdict(lambda:np.zeros(lt))
+	### policy update cycle Tu  
+	VehNumLoop = defaultdict(lambda:np.zeros(Tu))
+	VehNumLoopsAmongRegions = defaultdict(lambda:np.zeros(Tu))
 
 	Counter = 0
 
@@ -265,6 +270,12 @@ if __name__ == '__main__':
 	for i in range(Tsim):
 
 		traci.simulationStep()
+
+		for edge in AllEdgesList:  ###record
+			edge_id = edge[2:]
+			VehNumEdge[edge]+= traci.edge.getLastStepVehicleNumber(edge_id)
+			# OccupyEdge[edge]+= traci.edge.getLastStepOccupancy(edge_id)
+
 		if i>warm_up: ### warm-up the network
 		
 
@@ -280,14 +291,14 @@ if __name__ == '__main__':
 				region_id = edge[0:2]
 				temp = traci.edge.getLastStepVehicleNumber(edge_id)
 				VehNumRegion[region_id][j]+=temp
-				# VehNumEdge[edge] += temp
+				 
 
 
-			j = i%(lt*Tc)-1
+			j = i%(Tu*Tc)-1
 			if j<0:
-				j=lt*Tc-1
+				j=Tu*Tc-1
 
-			for k in range(lt):
+			for k in range(Tu):
 				if j==k*Tc:
 					VehNumLoop[loop][k] = 0
 					VehNumLoopsAmongRegions[connection][k] = 0
@@ -591,6 +602,18 @@ if __name__ == '__main__':
 		####################################-------------Implement the signal setting--------------###################################
 		if Counter==Tc:			
 			Counter = 0	
+			#### record the vehnum on each pahse every 60 seconds
+			period0 = i/Tc
+			for edge in AllEdgesList:
+				interval = VehNum_files.createElement('interval')
+				interval.setAttribute('begin',str(period0*Tc))
+				interval.setAttribute('end',str((period0+1)*Tc))
+				interval.setAttribute('id',edge) 
+				interval.setAttribute('vehnum',str(VehNumEdge[edge]/Tc))
+				# interval.setAttribute('Occupy',str(OccupyEdge[edge]/Tc))
+				VehNum.appendChild(interval)
+			VehNumEdge = defaultdict(lambda:0)
+			# OccupyEdge = defaultdict(lambda:0)
 
 		for id in PhaseTime.keys(): ##PhaseTime={intersection_id:{phasesequence:[0 0 0 1 1 0 0]}}
 			PhaseNum = len(PhaseTime[id])
@@ -601,38 +624,15 @@ if __name__ == '__main__':
 					break
 
 		Counter = Counter + 1
-		
-			# #### record the 
-			# period0 = i/Tc
-			# for edge in EdgesList:
-			# 	interval = VehNum_files.createElement('interval')
-			# 	interval.setAttribute('begin',str(period0*Tc))
-			# 	interval.setAttribute('end',str((period0+1)*Tc))
-			# 	interval.setAttribute('id',edge)
-			# 	VehNumEdge[edge]/Tc
-			# 	interval.setAttribute('vehnum',str(VehNumEdge[edge]/Tc))
-			# 	# interval.setAttribute('Occupy',str(OccupyEdge[edge]/Tc))
-			# 	VehNum.appendChild(interval)
-			# VehNumEdge = defaultdict(lambda:0)
-			# OccupyEdge = defaultdict(lambda:0)
-
-			###change the phase time
-
-			# if (i+1)%1200==0:
-			# 	for intersection in ActionRoot.findall('Intersection'):
-			# 		intersection_id = intersection.get('id')
-			# 		PhaseNum = int(intersection.get('PhaseNum'))
-			# 		PhaseTime[intersection_id]=get_random_phasetime(PhaseNum,Tc)
-				# print PhaseTime
 				
 
-	# fp = open('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\VehNum.xml','w')
+	fp = open('./VehNum.xml','w')
 	
-	# try:
-	# 	VehNum_files.writexml(fp,indent='\t', addindent='\t',newl='\n',encoding="utf-8")
-	# except:
-	# 	trackback.print_exc() 
-	# finally: 
-	# 	fp.close() 
+	try:
+		VehNum_files.writexml(fp,indent='\t', addindent='\t',newl='\n',encoding="utf-8")
+	except:
+		trackback.print_exc() 
+	finally: 
+		fp.close() 
 
 	traci.close()
