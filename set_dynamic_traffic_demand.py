@@ -5,8 +5,12 @@ import random
 
 period_num = 1
 period = 3600
+demand_level = 8
 
-Flow_net = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_final.rou.xml')
+# Flow_net = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_final.rou.xml')
+# FlowRoot = Flow_net.getroot()
+
+Flow_net = etree.parse('./Chj_final.rou.xml')
 FlowRoot = Flow_net.getroot()
 
 
@@ -35,7 +39,7 @@ for i in xrange(period_num):
 		flow_copy.setAttribute('from',flow.get('from'))
 		flow_copy.setAttribute('id',flow.get('id')+'_'+str(i))
 		traffic_demand = period*float(flow.get('number'))/3600
-		traffic_demand = int(traffic_demand)*(i+8)
+		traffic_demand = int(traffic_demand)*(i+demand_level)
 		# traffic_demand = random.randint(400,1200)
 		flow_copy.setAttribute('number',str(traffic_demand))
 		flow_copy.setAttribute('to',flow.get('to'))
@@ -46,7 +50,8 @@ for i in xrange(period_num):
 
 
 
-fp = open('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_Dynamic.rou.xml','w')
+# fp = open('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_Dynamic.rou.xml','w')
+fp = open('./Chj_Dynamic.rou.xml','w')
 	
 try:
 	DynamicFlows_files.writexml(fp,indent='\t', addindent='\t',newl='\n',encoding="utf-8")

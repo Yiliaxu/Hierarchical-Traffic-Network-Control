@@ -3,7 +3,7 @@ from collections import defaultdict
 from NetLabels import *
 
 class Coefficients():
-	def __init__(self,region,tc,period,PathWeights,PathInputValue,ObjWeight,InitVehNum_x,LinksOccupy_x,Action):
+	def __init__(self,region,tc,period,PathWeights,PathInputValue,ObjWeight,InitVehNum_x,LinksOccupy_x,Action,Interval):
 		self.region = region
 		self.x = NetInfoX[region]
 		self.y = NetInfoY[region]
@@ -19,6 +19,7 @@ class Coefficients():
 		self.PathInput = PathInputValue
 		self.InitVehNum_x = InitVehNum_x
 		self.LinksOccupy_x = LinksOccupy_x
+		self.action_interval = Interval
 
 		if region=='R1':
 			self.action_constraints={'R1_R2':Action[0],'R1_R3':Action[1]}
@@ -27,11 +28,11 @@ class Coefficients():
 		elif region=='R3':
 			self.action_constraints={'R3_R1':Action[4],'R3_R2':Action[5]}
 
-		self.saturationflow = 0.5 * self.period
+		self.saturationflow = 0.8 * self.period
 
 
 
-		print self.xlen,self.ylen,self.slen
+		# print self.xlen,self.ylen,self.slen
 
 
 	#############################################################################################################################
@@ -71,15 +72,16 @@ class Coefficients():
 		yoL = 0
 		yiL = 0		
 		for j in range(self.ylen):
-			temp = self.y['y'+str(j)] 
+
+			temp = self.y['y'+str(j)]
 			links = temp[4].split()
 			path = temp[0]
 			if j in FirstMovement[self.region]:
 				for i in range(self.xlen):
 					if self.x[i][0]==path and self.x[i][1] in links:
-						xL = i 
-						x_Eq[row*tc:(row+1)*tc,xL*tc:(xL+1)*tc] = x_Mat				
-				yoL = j				
+						xL = i
+						x_Eq[row*tc:(row+1)*tc,xL*tc:(xL+1)*tc] = x_Mat
+				yoL = j
 				y_Eq[row*tc:(row+1)*tc,yoL*tc:(yoL+1)*tc] = yo_Mat
 				b_Eq[row*tc:(row+1)*tc] = self.PathInput[path][0]*np.ones(tc)
 				b_Eq[row*tc] += self.PathInput[path][1]
@@ -87,10 +89,10 @@ class Coefficients():
 			else:
 				for i in range(self.xlen):
 					if self.x[i][0]==path and self.x[i][1] in links:
-						xL = i 
+						xL = i
+						x_Eq[row*tc:(row+1)*tc,xL*tc:(xL+1)*tc] = x_Mat
 				yoL = j
 				yiL = j-1
-				x_Eq[row*tc:(row+1)*tc,xL*tc:(xL+1)*tc] = x_Mat
 				y_Eq[row*tc:(row+1)*tc,yoL*tc:(yoL+1)*tc] = yo_Mat
 				y_Eq[row*tc:(row+1)*tc,yiL*tc:(yiL+1)*tc] = yi_Mat
 				b_Eq[row*tc:(row+1)*tc] = np.zeros(tc)
@@ -134,9 +136,10 @@ class Coefficients():
 		
 		InitCoefficient= defaultdict(lambda:0)
 		for i in range(self.slen):
+
 			junction = self.s['s'+str(i)][:-2]
 			pahsesequence = self.s['s'+str(i)][-1]
-			
+
 			for j in range(self.ylen):
 				temp = self.y['y'+str(j)]
 				if temp[1]==junction and temp[2]==pahsesequence:
@@ -149,14 +152,14 @@ class Coefficients():
 					for k in range(self.xlen):
 						if path==self.x[k][0] and self.x[k][1] in uplinks:
 							xL=k
-							x_Eq[row:row+tc-1,xL*tc:(xL+1)*tc-1] = coeff*np.eye(tc-1)	
+							x_Eq[row:row+tc-1,xL*tc:(xL+1)*tc-1] = coeff*np.eye(tc-1)
 							InitCoefficient[i]=InitCoefficient[i]+coeff*self.InitVehNum_x[xL]
-								
+
 						elif path==self.x[k][0] and self.x[k][1] in downlinks:
 							xL=k
 							x_Eq[row:row+tc-1,xL*tc:(xL+1)*tc-1] = -1*coeff*np.eye(tc-1)
 							InitCoefficient[i]=InitCoefficient[i]-coeff*self.InitVehNum_x[xL]
-							
+
 			eL = i
 			e_Eq[row:row+tc-1,eL*(tc-1):(eL+1)*(tc-1)]=-1*np.eye(tc-1)
 			b_Eq[row:row+tc-1] = np.zeros(tc-1)
@@ -165,7 +168,7 @@ class Coefficients():
 		self.InitCoefficient = InitCoefficient
 
 
-		return x_Eq,y_Eq,s_Eq,e_Eq,v_Eq,b_Eq
+		return x_Eq[0:row,:],y_Eq[0:row,:],s_Eq[0:row,:],e_Eq[0:row,:],v_Eq[0:row,:],b_Eq[0:row],row
 
 	#############################################################################################################################
 	################################################ Inequition constraints #################################################
@@ -179,6 +182,7 @@ class Coefficients():
 		v_Ineq = np.zeros((IneqCons,self.slen*(self.tc-1)))
 		e_Ineq = np.zeros((IneqCons,self.slen*(self.tc-1)))
 		b_Ineq = np.zeros(IneqCons)
+		slack_Ineq = np.zeros((IneqCons,2))
 
 		
 		row = 0
@@ -191,7 +195,7 @@ class Coefficients():
 			junction = temp[1]
 			pahsesequence = temp[2]
 			lane_num = temp[3]
-			uplinks = temp[4].split()	
+			uplinks = temp[4].split()
 			ratio = temp[6]
 			## -x+y<=0
 			InitVehNum = 0
@@ -199,29 +203,39 @@ class Coefficients():
 				if path==self.x[k][0] and self.x[k][1] in uplinks:
 					xL=k
 					InitVehNum = InitVehNum + self.InitVehNum_x[xL] ##initial time of control
-					x_Ineq[row+1:row+tc,xL*tc:(xL+1)*tc-1] = -1*np.eye(tc-1)	
-			
+					x_Ineq[row+1:row+tc,xL*tc:(xL+1)*tc-1] = -1*np.eye(tc-1)
+
 			y_Ineq[row:row+tc,yL*tc:(yL+1)*tc] =np.eye(tc)
 			b_Ineq[row] = InitVehNum
 			b_Ineq[row+1:row+tc]=np.zeros(tc-1)
 			row = row+tc
 
-			## -c*s*r+y<=0
-			for j in range(self.slen):
-				if self.s['s'+str(j)] == junction+'_'+pahsesequence:
-					sL = j
-					coeff = self.saturationflow*lane_num*ratio
-					s_Ineq[row:row+tc,sL*tc:(sL+1)*tc]=-1*coeff*np.eye(tc)
-			y_Ineq[row:row+tc,yL*tc:(yL+1)*tc] =np.eye(tc)
-			b_Ineq[row:row+tc]=np.zeros(tc)
-			row = row+tc
+		for i in range(self.ylen):
+			if i!=16:
+				yL = i
+				temp = self.y['y'+str(i)]
+				path = temp[0]
+				junction = temp[1]
+				pahsesequence = temp[2]
+				lane_num = temp[3]
+				uplinks = temp[4].split()
+				ratio = temp[6]
+				## -c*s*r+y<=0
+				for j in range(self.slen):
+					if self.s['s'+str(j)] == junction+'_'+pahsesequence:
+						sL = j
+						coeff = self.saturationflow*lane_num*ratio
+						s_Ineq[row:row+tc,sL*tc:(sL+1)*tc]=-1*coeff*np.eye(tc)
+				y_Ineq[row:row+tc,yL*tc:(yL+1)*tc] =np.eye(tc)
+				b_Ineq[row:row+tc]=np.zeros(tc)
+				row = row+tc
 
 
 		############################# auxilary constraints ################################
 		emin = -1000
 		emax = 1000
 		for j in range(self.slen):
-			sL = j 
+			sL = j
 			## -v+emin*s<=0
 			s_Ineq[row:row+tc-1,sL*tc+1:(sL+1)*tc]=emin*np.eye(tc-1)
 			v_Ineq[row:row+tc-1,sL*(tc-1):(sL+1)*(tc-1)]=-1*np.eye(tc-1)
@@ -251,18 +265,40 @@ class Coefficients():
 			row=row+tc-1
 
 		############################# constraints from upper level #######################################
-		# connections = self.action_constraints.keys()
-		# for j in range(self.ylen):
-		# 	temp = self.y['y'+str(j)]
-		# 	downlinks = temp[5]
-		# 	for i,connection in enumerate(connections):
-		# 		if connection in downlinks:
-		# 			yL = j
-		# 			y_Ineq[row+i,yL*tc:(yL+1)*tc] =np.ones(tc)
-        #
-		# for i in range(len(connections)):
-		# 	b_Ineq[row+i] = self.action_constraints[connections[i]]
+		connections = self.action_constraints.keys()
+		for i, connection in enumerate(connections):
+			if connection=='R1_R2':
+				action_interval = self.action_interval[0]
+			elif connection=='R1_R3':
+				action_interval = self.action_interval[1]
+			elif connection=='R2_R1':
+				action_interval = self.action_interval[2]
+			elif connection=='R2_R3':
+				action_interval = self.action_interval[3]
+			elif connection=='R3_R1':
+				action_interval = self.action_interval[4]
+			elif connection=='R3_R2':
+				action_interval = self.action_interval[5]
 
+			for j in range(self.ylen):
+				temp = self.y['y' + str(j)]
+				downlinks = temp[5]
+				if connection in downlinks:
+					yL = j
+					#### y1+y2+y3-d<=(action+interval)
+					y_Ineq[row + 2*i, yL * tc:(yL + 1) * tc] = np.ones(tc)
+					slack_Ineq[row + 2*i,0]=-1
+					b_Ineq[row + 2*i] = self.action_constraints[connections[i]] + action_interval
+					#### -y1-y2-y3-c<=-(action-interval)
+					y_Ineq[row + 2*i+1, yL * tc:(yL + 1) * tc] = -1*np.ones(tc)
+					slack_Ineq[row + 2 * i+1, 1] = -1
+					b_Ineq[row + 2 * i+1] = action_interval - self.action_constraints[connections[i]]
+
+
+
+		row = row + len(connections)*2
+
+		return x_Ineq[0:row, :], y_Ineq[0:row, :], s_Ineq[0:row, :], e_Ineq[0:row, :], v_Ineq[0:row, :], b_Ineq[0:row], slack_Ineq[0:row,:], row
 
 
 
@@ -287,7 +323,7 @@ class Coefficients():
 		# 	b_Ineq[row:row+tc]=self.LinksOccupy_x[i]*np.ones(tc)
 		# 	row=row+tc
 
-		return x_Ineq,y_Ineq,s_Ineq,e_Ineq,v_Ineq,b_Ineq
+
 
 
 
@@ -312,8 +348,9 @@ class Coefficients():
 		e_obj = np.ones((tc-1)*self.slen)
 
 		v_obj = np.zeros((tc-1)*self.slen)
+		slack_obj = -1*np.ones(2)
 
-		return x_obj,y_obj,s_obj,e_obj,v_obj
+		return x_obj,y_obj,s_obj,e_obj,v_obj,slack_obj
 		
 
 

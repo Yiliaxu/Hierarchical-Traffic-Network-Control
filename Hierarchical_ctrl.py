@@ -26,19 +26,39 @@ sumoBinary = "/usr/local/bin/sumo"
 
 sumoCmd = [sumoBinary, "-c", "chj.sumocfg","--seed", str(random.randint(1,100))]
 
-PORT = 8813
 
+# if 'SUMO_HOME' in os.environ:
+# 	tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
+# 	sys.path.append(tools)
+# else:
+# 	sys.exit("please declare environment variable 'SUMO_HOME'")
+# sumoBinary = "E:/software/sumo-win64-0.32.0/sumo-0.32.0/bin/sumo-gui"
+
+# sumoCmd = [sumoBinary, "-c", "chj.sumocfg","--seed", str(random.randint(1,100))]
+
+PORT = 8813
 import traci
 
-doc1 = etree.parse('TLSAction.xml')
+# doc1 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\TLSAction.xml')
+# ActionRoot = doc1.getroot()
+# doc2 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_final.rou.xml')
+# RouteRoot = doc2.getroot()
+# doc3 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\loops_ctrl.xml')
+# LoopsRoot = doc3.getroot()
+# doc4 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_ctrl.net.xml')
+# NetRoot = doc4.getroot()
+# doc5 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\TLSconnections.xml')
+# PhaseRoot = doc5.getroot()
+
+doc1 = etree.parse('./TLSAction.xml')
 ActionRoot = doc1.getroot()
-doc2 = etree.parse('Chj_final.rou.xml')
+doc2 = etree.parse('./Chj_final.rou.xml')
 RouteRoot = doc2.getroot()
-doc3 = etree.parse('loops_ctrl.xml')
+doc3 = etree.parse('./loops_ctrl.xml')
 LoopsRoot = doc3.getroot()
-doc4 = etree.parse('Chj_ctrl.net.xml')
+doc4 = etree.parse('./Chj_ctrl.net.xml')
 NetRoot = doc4.getroot()
-doc5 = etree.parse('TLSconnections.xml')
+doc5 = etree.parse('./TLSconnections.xml')
 PhaseRoot = doc5.getroot()
 
 
@@ -48,6 +68,7 @@ Tc = 60
 Tu = 2 ## upper level control cycle
 tc = 6 ## lower level control cycle
 period = 10 ##seconds
+Veh_L = 7
 
 
 
@@ -61,12 +82,27 @@ for edge in NetRoot.findall('edge'):
 ######## Edges need to be record for paths
 ######## EdgesList = {edge_id:{path_id:[np.zeros(Tc)]}}
 EdgesList = defaultdict(dict)
+EdgesOccupy = defaultdict(lambda:0)
 for routes in RouteRoot.findall('routes'):
 	for route in routes.findall('route'):
 		pathlinks = route.get('edges').split()
 		# print pathlinks
 		for link in pathlinks:
 			EdgesList[link]=defaultdict(dict)
+			if link[0:4] == 'Dest':  ### the destination links have infinite occupancy
+				EdgesOccupy[link] = 10000
+				break
+			else:
+				for edge in NetRoot.iter('edge'):
+					edge_id = edge.get('id')
+					if link == edge_id:
+						l = 0
+						for lane in edge.findall('lane'):
+							lanelen = float(lane.get('length'))
+							l += 1
+						EdgesOccupy[link] = lanelen * l / Veh_L
+						break
+
 for routes in RouteRoot.findall('routes'):
 	for route in routes.findall('route'):
 		route_id = route.get('id')
@@ -128,7 +164,7 @@ for zone in ['R1','R2','R3']:
 
 
 ########## calculate the link occupancy for links ##########################
-Veh_L = 8
+
 LinksOccupy = defaultdict(dict)
 for zone in ['R1','R2','R3']:
 	x = NetInfoX[zone]
@@ -145,35 +181,14 @@ for zone in ['R1','R2','R3']:
 				downlinks = y['y'+str(j)][5].split()
 			else:
 				downlinks = []
-			if y['y'+str(j)][0]==path and xlabel==uplinks[-1]: ## the last link 
-				lanenum = y['y'+str(j)][3]
+			if y['y'+str(j)][0]==path and xlabel in uplinks: ## the last
 				for link in links:
 					if link[0:4]=='Dest': ### the destination links have infinite occupancy
 						xoccup[i]=10000
 						break
 					else:
 						for edge in NetRoot.iter('edge'):
-							edge_id = edge.get('id')					
-							if link==edge_id and link != links[-1]:
-								l = 0
-								for lane in edge.findall('lane'):
-									lanelen = float(lane.get('length'))
-									l+=1
-								xoccup[i]+=lanelen*l/Veh_L
-								break
-							elif link==edge_id and link ==links[-1]:
-								for lane in edge.findall('lane'):
-									lanelen = float(lane.get('length'))
-								xoccup[i]+=lanelen*lanenum/Veh_L
-								break
-			elif y['y'+str(j)][0]==path and xlabel in uplinks[0:-1]: #### not the last link
-				for link in links:
-					if link[0:4]=='Dest':
-						xoccup[i]=10000
-						break
-					else:
-						for edge in NetRoot.iter('edge'):
-							edge_id = edge.get('id')					
+							edge_id = edge.get('id')
 							if link==edge_id:
 								l = 0
 								for lane in edge.findall('lane'):
@@ -181,6 +196,8 @@ for zone in ['R1','R2','R3']:
 									l+=1
 								xoccup[i]+=lanelen*l/Veh_L
 								break
+
+
 			elif y['y'+str(j)][0]==path and xlabel in downlinks:
 				for link in links:
 					if link[0:4]=='Dest':
@@ -196,8 +213,6 @@ for zone in ['R1','R2','R3']:
 									l+=1
 								xoccup[i]+=lanelen*l/Veh_L
 								break
-		if xoccup[i]==0:
-			xoccup[i]=-1
 	LinksOccupy[zone]=xoccup
 
 
@@ -235,7 +250,7 @@ if __name__ == '__main__':
 
 	# VehNumEdge = defaultdict(lambda:0)
 	VehNumRegion = defaultdict(lambda:np.zeros(Tc))
-	lt = 3
+	lt = 3  ### policy update cycle
 	VehNumLoop = defaultdict(lambda:np.zeros(lt))
 	VehNumLoopsAmongRegions = defaultdict(lambda:np.zeros(lt))
 
@@ -268,21 +283,29 @@ if __name__ == '__main__':
 				# VehNumEdge[edge] += temp
 
 
-			j = i%(lt*Tc)
-			if j==0:
-				j=lt*Tc
+			j = i%(lt*Tc)-1
+			if j<0:
+				j=lt*Tc-1
+
 			for k in range(lt):
-				if j>k*Tc and j<=(k+1)*Tc:
+				if j==k*Tc:
+					VehNumLoop[loop][k] = 0
+					VehNumLoopsAmongRegions[connection][k] = 0
+				if j>=k*Tc and j<(k+1)*Tc:
 					for zone in ['R1', 'R2', 'R3']:
-						VehNumLoop[loop][k]=0
-						VehNumLoopsAmongRegions[connection][k]=0
 						for loop in LoopsInput[zone]:
-							VehNumLoop[loop][k] += traci.inductionloop.getLastStepVehicleNumber(loop)
+							if traci.inductionloop.getLastStepMeanSpeed(loop) < 0.1:
+								vehnum = 0
+							else:
+								vehnum = traci.inductionloop.getLastStepVehicleNumber(loop)
+							VehNumLoop[loop][k] += vehnum
 						for connection in ['R1-R2', 'R1-R3', 'R2-R1', 'R2-R3', 'R3-R1', 'R3-R2']:
 							for l, loop in enumerate(LoopsAmongRegions[connection]):
-								VehNumLoopsAmongRegions[connection][k] += traci.inductionloop.getLastStepVehicleNumber(loop)
-
-
+								if traci.inductionloop.getLastStepMeanSpeed(loop) < 0.1:
+									vehnum = 0
+								else:
+									vehnum = traci.inductionloop.getLastStepVehicleNumber(loop)
+								VehNumLoopsAmongRegions[connection][k] += vehnum
 
 
 
@@ -295,6 +318,10 @@ if __name__ == '__main__':
 				if j<0:
 					j=5
 				# print i,j
+				for edge in EdgesList.keys():
+					for path in EdgesList[edge].keys():
+						EdgesList[edge][path][j]=0
+
 				##### EdgesList = {edge_id:{path_id:[np.zeros(Tc/period)]}}
 				vehID = traci.vehicle.getIDList()
 				for id in vehID:
@@ -305,19 +332,35 @@ if __name__ == '__main__':
 						for path in EdgesList[edge].keys():
 							if veh_route_id==path and veh_edge_id==edge:
 								EdgesList[edge][path][j]+=1
+								break
 
-				#### PathInput={region_id:{path_id:[input link id _number of lanes,  ,  ]}}
-				### PathInputValue = {region_id:{path_id:[the input flow of the first input link np.zeros(Tc/period)]}}
-				for zone in PathInput.keys():
-					for path in PathInput[zone].keys():
-						link = PathInput[zone][path][0]					
-						link_id = link.split('_')[0]
-						lanenum = int(link.split('_')[1])
-						for k in range(lanenum):
-							loop_id = zone+link_id+'_'+str(k)
-							PathInputValue[zone][path][j]+=traci.inductionloop.getLastStepVehicleNumber(loop_id)
+			######## get the number of vehicles
+			#### PathInput={region_id:{path_id:[input link id _number of lanes,  ,  ]}}
+			### PathInputValue = {region_id:{path_id:[the input flow of the first input link np.zeros(Tc/period)]}}
+			#### for lower control per period (10seconds)
+			j = i % Tc - 1
+			if j < 0:
+				j = Tc-1
 
+			for k in range(Tc/period):
+				if j == k*period:
+					for zone in PathInput.keys():
+						for path in PathInput[zone].keys():
+							PathInputValue[zone][path][k] = 0
+				elif j>=k*period and j<(k+1)*period:
+					for zone in PathInput.keys():
+						for path in PathInput[zone].keys():
+							link = PathInput[zone][path][0]
+							link_id = link.split('_')[0]
+							lanenum = int(link.split('_')[1])
+							for l in range(lanenum):
+								loop_id = zone + link_id + '_' + str(l)
+								if traci.inductionloop.getLastStepMeanSpeed(loop_id)<0.1:
+									vehnum = 0
+								else:
+									vehnum = traci.inductionloop.getLastStepVehicleNumber(loop_id)
 
+								PathInputValue[zone][path][k] += vehnum
 
 			#################################################################################
 			################# update the upper level policy every Tu cycles #################
@@ -326,7 +369,7 @@ if __name__ == '__main__':
 
 				### calculate the number of movements between regions
 				### set the maximum and minimum numbre of vehicles among regions
-				SaturationFlow = 0.8 #veh/s 
+				# SaturationFlow = 0.8 #veh/s
 				ActionRange = np.zeros((6,2))
 				linktype = ['R1-R2','R1-R3','R2-R1','R2-R3','R3-R1','R3-R2']
 				loopsnum = defaultdict(lambda:0)
@@ -346,29 +389,24 @@ if __name__ == '__main__':
 					ActionRange[j,1] = ActionRange[j,1]*np.mean(VehNumLoopsAmongRegions[linktype[j]])/loopsnum[j]
 
 
-
 				### the average number of vehicles in regions 
 				N_current=np.zeros(3)
 				for j in range(3):
 					N_current[j] = np.mean(VehNumRegion[zone[j]])
-
 
 				### the average traffic demand for regions 
 				D_current=np.zeros(3)
 				for j in xrange(3):
 					for loop in LoopsInput[zone[j]]:
 						D_current[j]+=np.mean(VehNumLoop[loop])
-
-
-
 				
 				upper_controller = Update_policy(Tc,Tu,ActionRange,N_current,D_current,LoopsOutputNum)
-				State, ActionSpace, Opt_policy = upper_controller.STPM_network()
+				State, ActionSpace, Opt_policy, action_interval = upper_controller.STPM_network()
 
 
 			#################################################################################
 			################# the lower level control every one cycles #################
-			if i%Tc==0 and i>=Tu*Tc+warm_up:
+			if i%(tc*period)==0 and i>=Tu*Tc+warm_up:
 
 				## determine current network state and action to take
 				VehNumZone = defaultdict(lambda:0)
@@ -460,8 +498,11 @@ if __name__ == '__main__':
 						##### EdgesList = {edge_id:{path_id:[np.zeros(Tc/period)]}}
 						for link in links:
 							# print link,path_id
-							InitVehNum_x[j]+=np.mean(EdgesList[link][path_id])
-									
+							# InitVehNum_x[j]+=np.mean(EdgesList[link][path_id])
+							InitVehNum_x[j] += EdgesList[link][path_id][-1]
+						if InitVehNum_x[j]>LinksOccupy[zone][j]:
+							print 'overflow'
+							InitVehNum_x[j] = LinksOccupy[zone][j]
 					
 					### find the number of lanes in input links--- PathInput={region_id:{path_id:[input link id_number of lanes]}}
 					### PathInputValue = {region_id:{path_id:[the input flow of the first input link np.zeros(Tc/period)]}}
@@ -473,15 +514,21 @@ if __name__ == '__main__':
 						links = PathInput[zone][path]
 						for link in links:
 							link_id = link.split('_')[0]
-							InputLinksValue[path][1]+=np.mean(EdgesList[link_id][path])
+							# InputLinksValue[path][1]+=np.mean(EdgesList[link_id][path])
+							InputLinksValue[path][1] += EdgesList[link_id][path][-1]
+							## judge whether overflow
+							totalvehnum=0
+							for temp_path in EdgesList[link_id].keys():
+								totalvehnum+= EdgesList[link_id][temp_path][-1]
+							if totalvehnum>EdgesOccupy[link_id]:
+								print 'overflow'
 
-
-					OptCoeff = Coefficients(zone,tc,period,PathWeights,InputLinksValue,ObjWeight[zone],InitVehNum_x,LinksOccupy[zone],Action_current)
-					x_Eq,y_Eq,s_Eq,e_Eq,v_Eq,b_Eq = OptCoeff.EqCoeff()
-					x_Ineq,y_Ineq,s_Ineq,e_Ineq,v_Ineq,b_Ineq = OptCoeff.IneqCoeff()
-					x_obj,y_obj,s_obj,e_obj,v_obj = OptCoeff.ObjCoeff()
+					OptCoeff = Coefficients(zone,tc,period,PathWeights,InputLinksValue,ObjWeight[zone],InitVehNum_x,LinksOccupy[zone],Action_current,action_interval)
+					x_Eq,y_Eq,s_Eq,e_Eq,v_Eq,b_Eq,row_Eq = OptCoeff.EqCoeff()
+					x_Ineq,y_Ineq,s_Ineq,e_Ineq,v_Ineq,b_Ineq,slack_Ineq,row_Ineq = OptCoeff.IneqCoeff()
+					x_obj,y_obj,s_obj,e_obj,v_obj,slack_obj = OptCoeff.ObjCoeff()
 					Aeq = np.hstack((x_Eq,y_Eq,s_Eq,e_Eq,v_Eq))
-					Aineq = np.hstack((x_Ineq,y_Ineq,s_Ineq,e_Ineq,v_Ineq))
+					Aineq = np.hstack((x_Ineq,y_Ineq,s_Ineq,e_Ineq,v_Ineq,slack_Ineq))
 
 					OptimizeProblem = cplex.Cplex()
 
@@ -503,23 +550,34 @@ if __name__ == '__main__':
 												  types = [OptimizeProblem.variables.type.continuous]*slen*(tc-1))
 					OptimizeProblem.variables.add(names= ["v"+str(j) for j in range(slen*(tc-1))], obj = v_obj,
 												  types = [OptimizeProblem.variables.type.continuous]*slen*(tc-1))
+					OptimizeProblem.variables.add(names=["slack" + str(j) for j in range(2)], obj=slack_obj, lb = np.zeros(2),
+												  types=[OptimizeProblem.variables.type.continuous]*2)
 
 					Variables_Num = OptimizeProblem.variables.get_num()
 					Variables_Name = OptimizeProblem.variables.get_names()
 
-					############# add constraints
-					for j in range(len(b_Eq)):
-						OptimizeProblem.linear_constraints.add(lin_expr= [cplex.SparsePair(ind= [var for var in Variables_Name], 
-							val= Aeq[j,:])],rhs= [b_Eq[j]], senses = ['E'])
+					############# add equition constraints
+					for j in range(row_Eq):
+						OptimizeProblem.linear_constraints.add(lin_expr= [cplex.SparsePair(ind= [var for var in Variables_Name[0:-2]],
+							val= Aeq[j,:])],rhs= [b_Eq[j]], senses = ['E'],names = ['Eq'+str(j)])
 
-					# for j in range(len(b_Ineq)):
-					# 	OptimizeProblem.linear_constraints.add(lin_expr= [cplex.SparsePair(ind= [var for var in Variables_Name],
-					# 		val= Aineq[j,:])],rhs= [b_Ineq[j]], senses = ['L'])
+					############# add inequition constraints
+					for j in range(row_Ineq):
+						OptimizeProblem.linear_constraints.add(lin_expr= [cplex.SparsePair(ind= [var for var in Variables_Name],
+							val= Aineq[j,:])],rhs= [b_Ineq[j]], senses = ['L'],names = ['Ineq'+str(j)])
 					
 					# Solve the model and print the answer
 					OptimizeProblem.objective.set_sense(OptimizeProblem.objective.sense.maximize)
 					OptimizeProblem.solve()
-					NewPhaseTime = OptimizeProblem.solution.get_values()[(xlen+ylen)*tc:(xlen+ylen+slen)*tc]
+					Results = OptimizeProblem.solution.get_values()
+					Xvalues = Results[0:xlen*tc]
+					Yvalues = Results[xlen*tc:(xlen+ylen)*tc]
+					Svalues = Results[(xlen+ylen)*tc:(xlen+ylen+slen)*tc]
+					Evalues = Results[(xlen+ylen+slen)*tc:(xlen+ylen+slen)*tc+slen*(tc-1)]
+					Vvalues = Results[(xlen+ylen+slen)*tc+slen*(tc-1):(xlen+ylen+slen)*tc+2*slen*(tc-1)]
+					SlackValues = Results[-2:]
+
+					NewPhaseTime = Results[(xlen+ylen)*tc:(xlen+ylen+slen)*tc]
 					## update the signal settings
 					for k in range(slen):
 						junction_id = NetInfoS[zone]['s'+str(k)][:-2]

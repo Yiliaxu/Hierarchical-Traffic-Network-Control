@@ -59,7 +59,7 @@ class Update_policy():
 			maxkey = max(Qin,key=Qin.get)		
 			Qin[maxkey] = Qin[maxkey]+1.0-np.sum(Qin.values())
 			self.DemandIn[i] = Qin
-			print np.sum(Qin.values())
+			# print np.sum(Qin.values())
 
 			## Gaussian distribution----the out flow of each -region
 			model = pickle.load(open('MFD_'+zone[i]+'.sav','rb'))
@@ -98,7 +98,7 @@ class Update_policy():
 				maxkey = max(Qout,key=Qout.get)
 				Qout[maxkey] = Qout[maxkey]+1.0-np.sum(Qout.values())
 			self.OutFlow[i] = Qout
-			print np.sum(Qout.values())
+			# print np.sum(Qout.values())
 		
 		### state_range
 		index = np.array([[2,4],[0,5],[1,3]]) ## idex for BetRgs = ['R1-R2','R1-R3','R2-R1','R2-R3','R3-R1','R3-R2']
@@ -118,10 +118,12 @@ class Update_policy():
 
 
 	def Split_action(self):
+		action_interval = np.zeros(6)
 		for i in xrange(6):
 			min_action = self.ActionRange[i,0]
 			max_action = self.ActionRange[i,1]
 			interval = round(1.0*(max_action-min_action)/self.region_action_num)
+			action_interval[i]=interval
 			self.action[BetRgs[i]][0]=min_action
 			for j in xrange(1,self.region_action_num):
 				self.action[BetRgs[i]][j]=min_action+j*interval
@@ -143,6 +145,8 @@ class Update_policy():
 									index = i*math.pow(self.region_action_num,5)+j*math.pow(self.region_action_num,4)+k*math.pow(self.region_action_num,3)+l*math.pow(self.region_action_num,2)+m*self.region_action_num+n
 									a[index]=np.array([a1,a2,a3,a4,a5,a6])
 			self.ActionSpace = a
+		return action_interval
+
 
 
 
@@ -162,7 +166,7 @@ class Update_policy():
 		for i in Slist:
 			prob[i]+=error
 		prob[i]+=1-np.sum(prob.values())
-		print np.sum(prob.values())
+		# print np.sum(prob.values())
 
 
 
@@ -186,7 +190,8 @@ class Update_policy():
 			for i in xrange(len(state)-1):
 				s = [state[i],state[i+1]]
 				Dtemp = range(int(s[0] + DifferInside), int(s[1] + DifferInside))
-				UniformProb = 1.0/len(Dtemp)
+				# print len(Dtemp)
+				UniformProb = 1.0/(len(Dtemp)+0.001)
 				P_s_s_next= np.zeros(3)
 				Ptemp = np.zeros(3)
 				for k in Dtemp:
@@ -285,7 +290,7 @@ class Update_policy():
 
 		self.Split_state()
 		# pdb.set_trace()
-		self.Split_action()
+		action_interval = self.Split_action()
 		# pdb.set_trace()
 
 		## get the state transition probability model for subregion under different actions
@@ -307,7 +312,7 @@ class Update_policy():
 		self.STPModel_Network = STPModel_Network
 		self.Reward_Network  = Reward_Network
 		Optimal_policy = self.Policy_Optimize()
-		return self.state, self.ActionSpace, Optimal_policy
+		return self.state, self.ActionSpace, Optimal_policy,action_interval
 
 
 
