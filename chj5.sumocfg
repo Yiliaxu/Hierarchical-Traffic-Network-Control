@@ -10,9 +10,9 @@
 			<end value="3600"/>
 		</time>
 		<output>
-			<queue-output value="queue5.xml"/>
-			<summary value="summary5.xml"/>
-			<tripinfo-output value="tripinfo5.xml"/>
+			<queue-output value="HTSCqueue5.xml"/>
+			<summary value="HTSCsummary5.xml"/>
+			<tripinfo-output value="HTSCtripinfo5.xml"/>
 		</output>
 		<report>
 			<xml-validation value="never"/>

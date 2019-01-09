@@ -628,7 +628,7 @@ if __name__ == '__main__':
 		Counter = Counter + 1
 				
 
-	fp = open('./VehNum'+str(demand_level)+'.xml','w')
+	fp = open('./HTSCVehNum'+str(demand_level)+'.xml','w')
 	
 	try:
 		VehNum_files.writexml(fp,indent='\t', addindent='\t',newl='\n',encoding="utf-8")
