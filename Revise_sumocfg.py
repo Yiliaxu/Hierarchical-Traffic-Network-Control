@@ -4,7 +4,7 @@ import xml.dom.minidom as doc
 import random
 
  
-demand_level = 5
+demand_level = 10
 
 # Flow_net = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_final.rou.xml')
 # FlowRoot = Flow_net.getroot()
@@ -64,7 +64,7 @@ sumocfg.appendChild(report)
 
 
 # fp = open('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_Dynamic.rou.xml','w')
-fp = open('./chj'+str(demand_level)+'.sumocfg','w')
+fp = open('./fixchj'+str(demand_level)+'.sumocfg','w')
 	
 try:
 	Sumocfg_files.writexml(fp,indent='\t', addindent='\t',newl='\n',encoding="utf-8")
