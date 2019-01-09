@@ -4,7 +4,7 @@ import xml.dom.minidom as doc
 import random
 
  
-demand_level = 10
+demand_level = 5
 
 # Flow_net = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_final.rou.xml')
 # FlowRoot = Flow_net.getroot()
@@ -39,13 +39,13 @@ sumocfg.appendChild(time)
 
 outputs = Sumocfg_files.createElement('output')
 queueoutput = Sumocfg_files.createElement('queue-output')
-queueoutput.setAttribute('value','HTSCqueue'+str(demand_level)+".xml")
+queueoutput.setAttribute('value','FTCqueue'+str(demand_level)+".xml")
 outputs.appendChild(queueoutput)
 summary = Sumocfg_files.createElement('summary')
-summary.setAttribute('value','HTSCsummary'+str(demand_level)+".xml")
+summary.setAttribute('value','FTCsummary'+str(demand_level)+".xml")
 outputs.appendChild(summary)
 tripinfo = Sumocfg_files.createElement('tripinfo-output')
-tripinfo.setAttribute('value','HTSCtripinfo'+str(demand_level)+".xml")
+tripinfo.setAttribute('value','FTCtripinfo'+str(demand_level)+".xml")
 outputs.appendChild(tripinfo)
 sumocfg.appendChild(outputs)
 

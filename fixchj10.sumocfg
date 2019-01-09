@@ -10,9 +10,9 @@
 			<end value="3600"/>
 		</time>
 		<output>
-			<queue-output value="HTSCqueue10.xml"/>
-			<summary value="HTSCsummary10.xml"/>
-			<tripinfo-output value="HTSCtripinfo10.xml"/>
+			<queue-output value="FTCqueue10.xml"/>
+			<summary value="FTCsummary10.xml"/>
+			<tripinfo-output value="FTCtripinfo10.xml"/>
 		</output>
 		<report>
 			<xml-validation value="never"/>
