@@ -230,8 +230,10 @@ class Update_policy():
 
         for i in xrange(len(state_list)):
             r = state_list[i]
-            ###Reward[i] = Reward_R1[r[0]]+Reward_R2[r[1]]+Reward_R3[r[2]]
-            Reward[i] = np.abs(Reward_R1[r[0]]-Reward_R2[r[1]]) +np.abs(Reward_R1[r[0]]-Reward_R3[r[2]])+ np.abs(Reward_R2[r[1]]-Reward_R3[r[2]])
+            ###Reward[i] = 
+            
+            error = np.abs(Reward_R1[r[0]]-Reward_R2[r[1]]) +np.abs(Reward_R1[r[0]]-Reward_R3[r[2]])+ np.abs(Reward_R2[r[1]]-Reward_R3[r[2]])
+            Reward[i] = Reward_R1[r[0]]+Reward_R2[r[1]]+Reward_R3[r[2]]+ error
             for j in xrange(len(state_list)):
                 c = state_list[j]
                 STPM[i, j] = STPM_R1[r[0], c[0]] * STPM_R2[r[1], c[1]] * STPM_R3[r[2], c[2]]
