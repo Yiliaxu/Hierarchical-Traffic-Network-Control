@@ -6,6 +6,7 @@ import math
 import numpy as np
 import random
 import pickle
+import cPickle
 from collections import defaultdict
 from scipy.stats import norm 
 from scipy.stats import poisson
@@ -62,7 +63,8 @@ class Update_policy():
 			# print np.sum(Qin.values())
 
 			## Gaussian distribution----the out flow of each -region
-			model = pickle.load(open('MFD_'+zone[i]+'.sav','rb'))
+			MFD = open('./MFD_'+zone[i]+'.sav','r')
+			model = pickle.load(MFD)
 			x=np.array([N_current[i]])	
 			q_pre, q_var = model.predict(x.reshape((len(x),1)))
 			q_sigma = np.sqrt(q_var)

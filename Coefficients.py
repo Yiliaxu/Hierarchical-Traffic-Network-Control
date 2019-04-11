@@ -211,29 +211,29 @@ class Coefficients():
 			row = row+tc
 
 		for i in range(self.ylen):
-			if i!=16:
-				yL = i
-				temp = self.y['y'+str(i)]
-				path = temp[0]
-				junction = temp[1]
-				pahsesequence = temp[2]
-				lane_num = temp[3]
-				uplinks = temp[4].split()
-				ratio = temp[6]
-				## -c*s*r+y<=0
-				for j in range(self.slen):
-					if self.s['s'+str(j)] == junction+'_'+pahsesequence:
-						sL = j
-						coeff = self.saturationflow*lane_num*ratio
-						s_Ineq[row:row+tc,sL*tc:(sL+1)*tc]=-1*coeff*np.eye(tc)
-				y_Ineq[row:row+tc,yL*tc:(yL+1)*tc] =np.eye(tc)
-				b_Ineq[row:row+tc]=np.zeros(tc)
-				row = row+tc
+			#if i!=16:
+			yL = i
+			temp = self.y['y'+str(i)]
+			path = temp[0]
+			junction = temp[1]
+			pahsesequence = temp[2]
+			lane_num = temp[3]
+			uplinks = temp[4].split()
+			ratio = temp[6]
+			## -c*s*r+y<=0
+			for j in range(self.slen):
+				if self.s['s'+str(j)] == junction+'_'+pahsesequence:
+					sL = j
+					coeff = self.saturationflow*lane_num*ratio
+					s_Ineq[row:row+tc,sL*tc:(sL+1)*tc]=-1*coeff*np.eye(tc)
+			y_Ineq[row:row+tc,yL*tc:(yL+1)*tc] =np.eye(tc)
+			b_Ineq[row:row+tc]=np.zeros(tc)
+			row = row+tc
 
 
 		############################# auxilary constraints ################################
-		emin = -1000
-		emax = 1000
+		emin = -1000000
+		emax = 1000000
 		for j in range(self.slen):
 			sL = j
 			## -v+emin*s<=0

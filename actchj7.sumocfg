@@ -1,0 +1,26 @@
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="Chj_final.net.xml" />
+        <route-files value="Chj_Demand7.rou.xml" />        
+        <additional-files value="loops_actuated.xml" />
+    </input>
+
+    <time>
+        <begin value="0" />
+        <end value="3600" />
+    </time>
+    
+    <output>
+       <queue-output value="ACTqueue7.xml" />
+       <summary value="ACTsummary7.xml" />
+       <tripinfo-output value="ACTtripinfo7.xml" />        
+    </output>
+    
+    <report>
+        <xml-validation value="never" />
+        <duration-log.disable value="true" />
+        <no-step-log value="true" />        
+    </report>
+
+</configuration>

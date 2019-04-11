@@ -18,23 +18,23 @@ import cplex
 import pdb
 from NetLabels import *
 
-SUMO_HOME = "/usr/local/bin/sumo"
-tools = "/home/Arain/sumo-git/tools/"
-sys.path.append(tools)
+# SUMO_HOME = "/usr/local/bin/sumo"
+# tools = "/home/Arain/sumo-git/tools/"
+# sys.path.append(tools)
 
-sumoBinary = "/usr/local/bin/sumo"
-
-sumoCmd = [sumoBinary, "-c", "chj.sumocfg","--seed", str(random.randint(1,100))]
-
-
-# if 'SUMO_HOME' in os.environ:
-# 	tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
-# 	sys.path.append(tools)
-# else:
-# 	sys.exit("please declare environment variable 'SUMO_HOME'")
-# sumoBinary = "E:/software/sumo-win64-0.32.0/sumo-0.32.0/bin/sumo-gui"
+# sumoBinary = "/usr/local/bin/sumo"
 
 # sumoCmd = [sumoBinary, "-c", "chj.sumocfg","--seed", str(random.randint(1,100))]
+
+
+if 'SUMO_HOME' in os.environ:
+	tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
+	sys.path.append(tools)
+else:
+	sys.exit("please declare environment variable 'SUMO_HOME'")
+sumoBinary = "E:/software/sumo-win64-0.32.0/sumo-0.32.0/bin/sumo-gui"
+
+sumoCmd = [sumoBinary, "-c", "chj.sumocfg","--seed", str(random.randint(1,100))]
 
 PORT = 8813
 import traci
@@ -262,7 +262,7 @@ if __name__ == '__main__':
 	Counter = 0
 
 	zone = ['R1','R2','R3']
-	warm_up = Tc*Tu*3
+	warm_up = Tc*Tu*2
 
 
 	############################################################################################################
@@ -444,7 +444,7 @@ if __name__ == '__main__':
 				PathWeights['R1']={
 				's2-n7':1,
 				's4-n5':1,
-				's5-e6':1,
+				's5-e6':5,
 				's6-w5':1,
 				's7-n4':1,
 				'n1-s6':1,
@@ -458,7 +458,7 @@ if __name__ == '__main__':
 				'e1-w5':1,
 				'n4-w2':1,
 				'w9-n3':1,
-				'w9-n1':1,
+				'w9-n1':5,
 				'w7-s7':1,
 				'w5-w9':1}
 				
@@ -478,7 +478,7 @@ if __name__ == '__main__':
 				}
 				PathWeights['R3']={
 				"w4-s1":1,
-				"w3-e3":1,
+				"w3-e3":5,
 				"s2-n7":1,
 				"s4-n5":1,
 				"s5-e6":1,

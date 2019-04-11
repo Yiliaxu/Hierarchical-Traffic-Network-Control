@@ -48,8 +48,8 @@ for i in xrange(period_num):
 
 
 
-# fp = open('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\Chj_Dynamic.rou.xml','w')
-fp = open('./Chj_Demand'+str(demand_level)+'.rou.xml','w')
+fp = open('./Chj_Dynamic.rou.xml','w')
+#fp = open('./Chj_Demand'+str(demand_level)+'.rou.xml','w')
 	
 try:
 	DynamicFlows_files.writexml(fp,indent='\t', addindent='\t',newl='\n',encoding="utf-8")
