@@ -11,7 +11,7 @@ from scipy.optimize import linprog
 # from cvxopt import matrix,solvers
 from scipy.sparse import identity
 from collections import defaultdict
-from Upper_ctrl import Update_policy
+from Upper_ctrl_test import Update_policy
 from Coefficients import Coefficients
 import pickle
 import cplex
