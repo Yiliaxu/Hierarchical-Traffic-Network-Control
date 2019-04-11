@@ -14,9 +14,9 @@ SimLen = 3600
 Tc = 60
 Times = SimLen/Tc
 
-traffic_demand = ['7']#'5','6','7','8','9',
+traffic_demand = ['8']#'5','6','7','8','9',
 MethodsNum = 3
-method_name = ['FTC','HTSC','test'] 
+method_name = ['FTC','HTSC','ASC'] 
 colorstr = ['k','b','g','r']
 
 
@@ -28,7 +28,7 @@ for k in xrange(len(traffic_demand)):
 	FixStepsRoot = doc11.getroot()
 	doc12 = etree.parse('../HTSCsummary'+traffic_demand[k]+'.xml')
 	HTSCStepsRoot = doc12.getroot()	
-	doc13 = etree.parse('../summary.xml')
+	doc13 = etree.parse('../ACTsummary'+traffic_demand[k]+'.xml')
 	TestStepsRoot = doc13.getroot()
 	
 	StepNum = len(FixStepsRoot.findall('step')) 
