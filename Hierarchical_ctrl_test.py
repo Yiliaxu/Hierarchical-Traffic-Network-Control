@@ -12,7 +12,7 @@ from scipy.optimize import linprog
 from scipy.sparse import identity
 from collections import defaultdict
 from Upper_ctrl_test import Update_policy
-from Coefficients import Coefficients
+from Coefficients_test import Coefficients
 import pickle
 import cplex
 import pdb
@@ -522,10 +522,13 @@ if __name__ == '__main__':
                     OptCoeff = Coefficients(zone, tc, period, PathWeights, InputLinksValue, ObjWeight[zone],
                                             InitVehNum_x, LinksOccupy[zone], Action_current, action_interval)
                     x_Eq, y_Eq, s_Eq, e_Eq, v_Eq, b_Eq, row_Eq = OptCoeff.EqCoeff()
-                    x_Ineq, y_Ineq, s_Ineq, e_Ineq, v_Ineq, b_Ineq, slack_Ineq, row_Ineq = OptCoeff.IneqCoeff()
+                    # x_Ineq, y_Ineq, s_Ineq, e_Ineq, v_Ineq, b_Ineq, slack_Ineq, row_Ineq = OptCoeff.IneqCoeff()
+                    x_Ineq, y_Ineq, s_Ineq, e_Ineq, v_Ineq, b_Ineq, row_Ineq = OptCoeff.IneqCoeff()
                     x_obj, y_obj, s_obj, e_obj, v_obj, slack_obj = OptCoeff.ObjCoeff()
                     Aeq = np.hstack((x_Eq, y_Eq, s_Eq, e_Eq, v_Eq))
-                    Aineq = np.hstack((x_Ineq, y_Ineq, s_Ineq, e_Ineq, v_Ineq, slack_Ineq))
+                    Aineq = np.hstack((x_Ineq, y_Ineq, s_Ineq, e_Ineq, v_Ineq))
+                    # Aineq = np.hstack((x_Ineq, y_Ineq, s_Ineq, e_Ineq, v_Ineq, slack_Ineq))
+
 
                     OptimizeProblem = cplex.Cplex()
 
@@ -580,7 +583,7 @@ if __name__ == '__main__':
                     Vvalues = Results[
                               (xlen + ylen + slen) * tc + slen * (tc - 1):(xlen + ylen + slen) * tc + 2 * slen * (
                                           tc - 1)]
-                    SlackValues = Results[-2:]
+                    # SlackValues = Results[-2:]
 
                     NewPhaseTime = Results[(xlen + ylen) * tc:(xlen + ylen + slen) * tc]
                     ## update the signal settings
