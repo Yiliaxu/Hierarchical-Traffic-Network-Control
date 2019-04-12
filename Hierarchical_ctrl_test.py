@@ -551,9 +551,9 @@ if __name__ == '__main__':
                                                   types=[OptimizeProblem.variables.type.continuous] * slen * (tc - 1))
                     OptimizeProblem.variables.add(names=["v" + str(j) for j in range(slen * (tc - 1))], obj=v_obj,
                                                   types=[OptimizeProblem.variables.type.continuous] * slen * (tc - 1))
-                    OptimizeProblem.variables.add(names=["slack" + str(j) for j in range(2)], obj=slack_obj,
-                                                  lb=np.zeros(2),
-                                                  types=[OptimizeProblem.variables.type.continuous] * 2)
+                    #OptimizeProblem.variables.add(names=["slack" + str(j) for j in range(2)], obj=slack_obj,
+                    #                              lb=np.zeros(2),
+                    #                              types=[OptimizeProblem.variables.type.continuous] * 2)
 
                     Variables_Num = OptimizeProblem.variables.get_num()
                     Variables_Name = OptimizeProblem.variables.get_names()
@@ -562,15 +562,13 @@ if __name__ == '__main__':
                     for j in range(row_Eq):
                         OptimizeProblem.linear_constraints.add(
                             lin_expr=[cplex.SparsePair(ind=[var for var in Variables_Name[0:-2]],
-                                                       val=Aeq[j, :])], rhs=[b_Eq[j]], senses=['E'],
-                            names=['Eq' + str(j)])
+                                                       val=Aeq[j, :])], rhs=[b_Eq[j]], senses=['E'], names=['Eq' + str(j)])
 
                     ############# add inequition constraints
                     for j in range(row_Ineq):
                         OptimizeProblem.linear_constraints.add(
                             lin_expr=[cplex.SparsePair(ind=[var for var in Variables_Name],
-                                                       val=Aineq[j, :])], rhs=[b_Ineq[j]], senses=['L'],
-                            names=['Ineq' + str(j)])
+                                                       val=Aineq[j, :])], rhs=[b_Ineq[j]], senses=['L'], names=['Ineq' + str(j)])
 
                     # Solve the model and print the answer
                     OptimizeProblem.objective.set_sense(OptimizeProblem.objective.sense.maximize)
