@@ -524,7 +524,9 @@ if __name__ == '__main__':
                     x_Eq, y_Eq, s_Eq, e_Eq, v_Eq, b_Eq, row_Eq = OptCoeff.EqCoeff()
                     # x_Ineq, y_Ineq, s_Ineq, e_Ineq, v_Ineq, b_Ineq, slack_Ineq, row_Ineq = OptCoeff.IneqCoeff()
                     x_Ineq, y_Ineq, s_Ineq, e_Ineq, v_Ineq, b_Ineq, row_Ineq = OptCoeff.IneqCoeff()
-                    x_obj, y_obj, s_obj, e_obj, v_obj, slack_obj = OptCoeff.ObjCoeff()
+                    # x_obj, y_obj, s_obj, e_obj, v_obj, slack_obj = OptCoeff.ObjCoeff()
+                    x_obj, y_obj, s_obj, e_obj, v_obj = OptCoeff.ObjCoeff()
+
                     Aeq = np.hstack((x_Eq, y_Eq, s_Eq, e_Eq, v_Eq))
                     Aineq = np.hstack((x_Ineq, y_Ineq, s_Ineq, e_Ineq, v_Ineq))
                     # Aineq = np.hstack((x_Ineq, y_Ineq, s_Ineq, e_Ineq, v_Ineq, slack_Ineq))

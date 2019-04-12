@@ -350,9 +350,9 @@ class Coefficients():
 		e_obj = np.ones((tc-1)*self.slen)
 
 		v_obj = np.zeros((tc-1)*self.slen)
-		slack_obj = -1*np.ones(2)
+		# slack_obj = -1*np.ones(2)
 
-		return x_obj,y_obj,s_obj,e_obj,v_obj,slack_obj
+		return x_obj,y_obj,s_obj,e_obj,v_obj#,slack_obj
 		
 
 
