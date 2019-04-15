@@ -563,7 +563,7 @@ if __name__ == '__main__':
                     ############# add equition constraints
                     for j in range(row_Eq):
                         OptimizeProblem.linear_constraints.add(
-                            lin_expr=[cplex.SparsePair(ind=[var for var in Variables_Name[0:-2]],
+                            lin_expr=[cplex.SparsePair(ind=[var for var in Variables_Name],
                                                        val=Aeq[j, :])], rhs=[b_Eq[j]], senses=['E'], names=['Eq' + str(j)])
 
                     ############# add inequition constraints
