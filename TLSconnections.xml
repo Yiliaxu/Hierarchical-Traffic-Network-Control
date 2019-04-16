@@ -553,13 +553,38 @@
 		<connection dir="L" from="100323308#3" linkIndex="8" to="69550029#1" />
 		<connection dir="l" from="100323308#3" linkIndex="9" to="542054843#1" />
 		<connection dir="t" from="100323308#3" linkIndex="10" to="-100323308#3" />
+		<connection dir="r" from="135626762#2" linkIndex="11" phase="2" to="542054843#1" />
+		<connection dir="R" from="135626762#2" linkIndex="12" phase="2" to="-100323308#3" />
+		<connection between="R3-R2" dir="s" from="135626762#2" linkIndex="13" phase="2" to="69555386#0" />
+		<connection between="R3-R2" dir="s" from="135626762#2" linkIndex="14" phase="2" to="69555386#0" />
+		<connection dir="l" from="135626762#2" linkIndex="15" phase="2" to="100323308#5" />
+		<connection dir="t" from="135626762#2" linkIndex="16" to="69550029#1" />
+	</Intersection>
+		<!-- <Intersection id="R3_Junction6" linknum="23" tlType="actuated">
+		<connection dir="r" from="-100323308#5" linkIndex="17" phase="3" to="69550029#1" />
+		<connection dir="s" from="-100323308#5" linkIndex="18" phase="3" to="542054843#1" />
+		<connection dir="s" from="-100323308#5" linkIndex="19" phase="3" to="542054843#1" />
+		<connection dir="s" from="-100323308#5" linkIndex="20" phase="3" to="-100323308#3" />
+		<connection dir="l" from="-100323308#5" linkIndex="21" to="69555386#0" />
+		<connection dir="t" from="-100323308#5" linkIndex="22" to="100323308#5" />
+		<connection dir="s" from="-69555386#0" linkIndex="0" phase="1" to="69550029#1" />
+		<connection dir="s" from="-69555386#0" linkIndex="1" phase="1" to="69550029#1" />
+		<connection dir="L" from="-69555386#0" linkIndex="2" to="542054843#1" />
+		<connection dir="l" from="-69555386#0" linkIndex="3" to="-100323308#3" />
+		<connection dir="t" from="-69555386#0" linkIndex="4" to="69555386#0" />
+		<connection dir="r" from="100323308#3" linkIndex="5" to="69555386#0" />
+		<connection dir="s" from="100323308#3" linkIndex="6" phase="3" to="100323308#5" />
+		<connection dir="s" from="100323308#3" linkIndex="7" phase="3" to="100323308#5" />
+		<connection dir="L" from="100323308#3" linkIndex="8" to="69550029#1" />
+		<connection dir="l" from="100323308#3" linkIndex="9" to="542054843#1" />
+		<connection dir="t" from="100323308#3" linkIndex="10" to="-100323308#3" />
 		<connection dir="r" from="135626762#2" linkIndex="11" phase="1" to="542054843#1" />
 		<connection dir="R" from="135626762#2" linkIndex="12" phase="1" to="-100323308#3" />
 		<connection between="R3-R2" dir="s" from="135626762#2" linkIndex="13" phase="1" to="69555386#0" />
 		<connection between="R3-R2" dir="s" from="135626762#2" linkIndex="14" phase="1" to="69555386#0" />
 		<connection dir="l" from="135626762#2" linkIndex="15" phase="2" to="100323308#5" />
 		<connection dir="t" from="135626762#2" linkIndex="16" to="69550029#1" />
-	</Intersection>
+	</Intersection> -->
 	<Intersection id="R3_Junction7" linknum="13" tlType="actuated">
 		<connection dir="r" from="-230491007" linkIndex="4" phase="2" to="135626762#1" />
 		<connection dir="s" from="-230491007" linkIndex="5" to="253924915#0" />

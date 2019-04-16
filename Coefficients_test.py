@@ -122,6 +122,8 @@ class Coefficients():
 			b_Eq[row*tc:(row+1)*tc] = np.ones(tc)
 			row+=1
 
+
+
 		############## the sum of the signal phase equal to tc #############
 		row = row*tc
 		for junction in JpL.values():
@@ -264,6 +266,25 @@ class Coefficients():
 			b_Ineq[row:row+tc-1]=-1*emin*np.ones(tc-1)
 			row=row+tc-1
 
+
+
+        ###############################signal inequation constraints##################################################
+		##s1+s3-s2<1
+		temp = np.array([[1,-1,1,0,0,0],[0,1,-1,1,0,0],[0,0,1,-1,1,0],[0,0,0,1,-1,1],[1,-1,0,1,0,0],[0,1,-1,0,1,0],[0,0,1,-1,0,1,],[1,-1,0,0,1,0],[0,1,-1,0,0,1],[1,-1,0,0,0,1]])
+		num = len(temp)
+		for j in xrange(self.slen):
+			sL = j
+			s_Ineq[row:row+num,sL*tc:(sL+1)*tc]=temp
+			b_Ineq[row:row+num]=np.ones(num)
+			row = row+num
+
+		#### sum(s)>1
+		for j in xrange(self.slen):
+			sL = j
+			s_Ineq[row,sL*tc:(sL+1)*tc]=-1*np.ones((1,tc))
+			b_Ineq[row]=-1
+			row = row+1
+
 		############################# constraints from upper level #######################################
 		# connections = self.action_constraints.keys()
 		# for i, connection in enumerate(connections):
@@ -341,7 +362,7 @@ class Coefficients():
 			temp = -1*self.PathWeights[self.region][path]*self.ObjWeight/self.LinksOccupy_x[i]
 			x_obj[i*tc:(i+1)*tc]=temp*np.ones(tc)
 	
-		y_obj = -1*np.ones(tc*self.ylen) ### maxmize -y
+		y_obj = np.ones(tc*self.ylen) ### maxmize y
 
 		s_obj = np.zeros(tc*self.slen)
 		for i in range(self.slen): 

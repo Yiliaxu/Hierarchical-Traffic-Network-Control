@@ -40,7 +40,7 @@
 			<flow from="OrigionS6" id="s6-w5_0" number="800" route="s6-w5_0" to="DestinationW5"/>
 			<flow from="OrigionN3" id="n3-s7_0" number="800" route="n3-s7_0" to="DestinationS7"/>
 			<flow from="OrigionN6" id="n6-e5_0" number="800" route="n6-e5_0" to="DestinationE5"/>
-			<flow from="OrigionS5" id="s5-e6_0" number="800" route="s5-e6_0" to="DestinationE6"/>
+			<flow from="OrigionS5" id="s5-e6_0" number="480" route="s5-e6_0" to="DestinationE6"/>
 			<flow from="OrigionW8" id="w8-e4_0" number="800" route="w8-e4_0" to="DestinationE4"/>
 			<flow from="OrigionW3" id="w3-e3_0" number="480" route="w3-e3_0" to="DestinationE3"/>
 			<flow from="OrigionN2" id="n2-s8_0" number="480" route="n2-s8_0" to="DestinationS8"/>

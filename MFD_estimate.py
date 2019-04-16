@@ -133,23 +133,25 @@ for zone in ["R1","R2","R3"]:
 
 # #####################################################################
 # ############## Create linear regression object
-# regr = linear_model.LinearRegression()
+regr = linear_model.LinearRegression()
 
-# # Train the model using the training sets
-# for zone in ['R1','R2','R3']:
-# 	Train_X = TotalData[zone][:,0]
-# 	Train_Y = TotalVehOut[zone]
-# 	regr.fit(Train_X.reshape((len(Train_X),1)),Train_Y.reshape((len(Train_Y),1)))
-# 	print('Coefficients: \n', regr.coef_)
-# 	print('Coefficients: \n', regr.intercept_ )
-# 	x=np.linspace(0,500,100)
+# Train the model using the training sets
+for zone in ['R1','R2','R3']:
+	Train_X = TotalData[zone][:,0]
+	Train_Y = TotalVehOut[zone]
+	regr.fit(Train_X.reshape((len(Train_X),1)),Train_Y.reshape((len(Train_Y),1)))
+	print('Coefficients: \n', regr.coef_)
+	print('Coefficients: \n', regr.intercept_ )
+	x=np.linspace(0,500,100)
 
-# 	# Make predictions using the testing set
-# 	y_pred = regr.predict(x.reshape((len(x),1)))
-# 	fig, ax = plt.subplots()
-# 	ax.scatter(TotalData[zone][:,0],TotalVehOut[zone])
-# 	ax.plot(x,y_pred,linewidth=2,color='r')
-# 	plt.title('Subregion '+zone)
+	# Make predictions using the testing set
+	y_pred = regr.predict(x.reshape((len(x),1)))
+	fig, ax = plt.subplots()
+	ax.scatter(TotalData[zone][:,0],TotalVehOut[zone])
+	ax.plot(x,y_pred,linewidth=2,color='r')
+	plt.title('Subregion '+zone)
+	plt.xlabel('Traffic flow (veh/h)')
+	plt.ylabel('The average output traffic flow  (veh/h)')
 
 
 

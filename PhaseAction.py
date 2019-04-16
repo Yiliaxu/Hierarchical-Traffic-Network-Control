@@ -3,7 +3,7 @@ import xml.etree.ElementTree as etree
 import xml.dom.minidom as doc
 
 
-TLS_net = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\TLSconnections.xml')
+TLS_net = etree.parse('./TLSconnections.xml')
 TLSRoot = TLS_net.getroot()
 
 
@@ -38,7 +38,7 @@ for node in TLSRoot.findall('Intersection'):
 		CtrlNode.setAttribute('PhaseNum',str(phasenum))
 		TLSAction.appendChild(CtrlNode)
 
-fp = open('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\TLSAction.xml','w')
+fp = open('./TLSAction1.xml','w')
 	
 try:
 	PhaseAction_files.writexml(fp,indent='\t', addindent='\t',newl='\n',encoding="utf-8")

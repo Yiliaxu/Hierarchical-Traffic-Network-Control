@@ -36,7 +36,7 @@ sumoCmd = [sumoBinary, "-c", "chj8_test.sumocfg","--seed", str(random.randint(1,
 #     sys.exit("please declare environment variable 'SUMO_HOME'")
 # sumoBinary = "E:/software/sumo-win64-0.32.0/sumo-0.32.0/bin/sumo-gui"
 
-# sumoCmd = [sumoBinary, "-c", "chj.sumocfg", "--seed", str(random.randint(1, 100))]
+# sumoCmd = [sumoBinary, "-c", "chj8_test.sumocfg", "--seed", str(random.randint(1, 100))]
 
 PORT = 8813
 import traci
@@ -52,7 +52,7 @@ import traci
 # doc5 = etree.parse('D:\\Journal_paper\\hierarchical control based on Markov decision process and path-based signal control\\simulation\\TLSconnections.xml')
 # PhaseRoot = doc5.getroot()
 
-doc1 = etree.parse('./TLSAction.xml')
+doc1 = etree.parse('./TLSAction1.xml')
 ActionRoot = doc1.getroot()
 doc2 = etree.parse('./Chj_final.rou.xml')
 RouteRoot = doc2.getroot()
@@ -430,9 +430,9 @@ if __name__ == '__main__':
                 PathWeights['R1'] = {
                     's2-n7': 1,
                     's4-n5': 1,
-                    's5-e6': 10,
+                    's5-e6': 100,
                     's6-w5': 1,
-                    's7-n4': 1,
+                    's7-n4': 100,
                     'n1-s6': 1,
                     'n3-s7': 1,
                     'n5-w3': 1,
@@ -441,10 +441,10 @@ if __name__ == '__main__':
                     'w7-s2': 1,
                     'w2-n6': 1,
                     'e3-n3': 1,
-                    'e1-w5': 1,
+                    'e1-w5': 100,
                     'n4-w2': 1,
                     'w9-n3': 1,
-                    'w9-n1': 10,
+                    'w9-n1': 100, 
                     'w7-s7': 1,
                     'w5-w9': 1}
 
@@ -464,9 +464,9 @@ if __name__ == '__main__':
                 }
                 PathWeights['R3'] = {
                     "w4-s1": 1,
-                    "w3-e3": 10,
+                    "w3-e3": 1,
                     "s2-n7": 1,
-                    "s4-n5": 10,
+                    "s4-n5": 1,
                     "s5-e6": 1,
                     "s6-w5": 1,
                     "s7-n4": 1,
@@ -562,9 +562,10 @@ if __name__ == '__main__':
 
                     ############# add equition constraints
                     for j in range(row_Eq):
-                        OptimizeProblem.linear_constraints.add(
-                            lin_expr=[cplex.SparsePair(ind=[var for var in Variables_Name],
-                                                       val=Aeq[j, :])], rhs=[b_Eq[j]], senses=['E'], names=['Eq' + str(j)])
+                        OptimizeProblem.linear_constraints.add(lin_expr=[cplex.SparsePair(ind=[var for var in Variables_Name],val=Aeq[j, :])], rhs=[b_Eq[j]], senses=['E'],
+                            names=['Eq' + str(j)])
+                            # lin_expr=[cplex.SparsePair(ind=[var for var in Variables_Name[0:-2]],
+                            #                            val=Aeq[j, :])], rhs=[b_Eq[j]], senses=['E'], names=['Eq' + str(j)])
 
                     ############# add inequition constraints
                     for j in range(row_Ineq):

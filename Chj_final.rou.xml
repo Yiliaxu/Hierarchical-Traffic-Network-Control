@@ -53,7 +53,7 @@
         <flow from="OrigionS6" id="s6-w5" number="100" route="s6-w5" to="DestinationW5"/>
         <flow from="OrigionN3" id="n3-s7" number="100" route="n3-s7" to="DestinationS7"/>
         <flow from="OrigionN6" id="n6-e5" number="100" route="n6-e5" to="DestinationE5"/>
-        <flow from="OrigionS5" id="s5-e6" number="100" route="s5-e6" to="DestinationE6"/>
+        <flow from="OrigionS5" id="s5-e6" number="60" route="s5-e6" to="DestinationE6"/>
         <flow from="OrigionW8" id="w8-e4" number="100" route="w8-e4" to="DestinationE4"/>
         <flow from="OrigionW3" id="w3-e3" number="60" route="w3-e3" to="DestinationE3"/>
         <flow from="OrigionN2" id="n2-s8" number="60" route="n2-s8" to="DestinationS8"/>
